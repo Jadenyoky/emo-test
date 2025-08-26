@@ -31,6 +31,7 @@ const Page = () => {
           score: 50,
           question: 3,
         },
+        createdAt: serverTimestamp(),
       });
     } catch (error) {
       console.log("user error handle user data", error);
