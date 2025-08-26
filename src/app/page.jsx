@@ -19,7 +19,7 @@ import {
 } from "firebase/firestore";
 
 const Page = () => {
-  const [email, setemail] = useState("jaden_yoky2@yahoo.com");
+  const [email, setemail] = useState("ahmed@yahoo.com");
   const [password, setpassword] = useState("123456789");
   const [name, setname] = useState("Ahmed Jaden");
 
