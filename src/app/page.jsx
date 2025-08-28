@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { auth, db } from "../lib/firebase";
 import {
   createUserWithEmailAndPassword,
@@ -14,9 +14,11 @@ import {
   collection,
   doc,
   getDoc,
+  onSnapshot,
   serverTimestamp,
   setDoc,
 } from "firebase/firestore";
+import questions from "../lib/questions";
 
 const Page = () => {
   const [email, setemail] = useState("ahmed@yahoo.com");
@@ -63,9 +65,13 @@ const Page = () => {
 
   const handleGetData = async (user) => {
     try {
-      const userData = await getDoc(doc(db, "users", user.uid));
-      console.log("user data", userData.data());
-      setuserData(userData.data());
+      const unsub = onSnapshot(doc(db, "users", user.uid), (doc) => {
+        if (doc.exists()) {
+          console.log("current data", doc.data());
+          setuserData(doc.data());
+        }
+        return () => unsub();
+      });
     } catch (error) {
       console.log("user error get user data", error);
     }
@@ -83,6 +89,7 @@ const Page = () => {
 
       setloading(true);
     });
+    return () => userState();
   };
 
   useEffect(() => {
@@ -98,20 +105,13 @@ const Page = () => {
       );
       setloading(false);
 
-      console.log("user sign up", user);
-
       await updateProfile(user, {
         displayName: name,
       });
 
-      console.log("user update profile", user);
-
       await sendEmailVerification(user);
 
-      console.log("user send email verification", user);
-
       handleCurrentUser();
-      console.log(auth.currentUser);
 
       setloading(true);
     } catch (error) {
@@ -122,7 +122,7 @@ const Page = () => {
   const handleSignIn = async () => {
     try {
       const { user } = await signInWithEmailAndPassword(auth, email, password);
-      console.log("user sign in", user);
+
       handleCurrentUser();
     } catch (error) {
       console.log("user error sign in ", error);
@@ -132,7 +132,6 @@ const Page = () => {
   const handleResendVerification = async () => {
     try {
       await sendEmailVerification(user);
-      console.log("user resend email verification", user);
     } catch (error) {
       console.log("errrrr", error);
     }
@@ -141,10 +140,25 @@ const Page = () => {
   const handleSignOut = async () => {
     try {
       await signOut(auth);
-      console.log("user sign out", auth.currentUser);
-      setcurrentUser([]);
     } catch (err) {
       console.log("user error sign out", err);
+    }
+  };
+
+  const inputRef = useRef(null);
+  const updateData = async (user) => {
+    try {
+      const update = await setDoc(
+        doc(db, "users", user.uid),
+        {
+          name: inputRef.current.value,
+        },
+        {
+          merge: true,
+        }
+      );
+    } catch (error) {
+      console.log("user error handle user data", error);
     }
   };
 
@@ -152,12 +166,31 @@ const Page = () => {
     <main className="flex flex-col gap-[100px] justify-center items-center h-[auto] w-[500px] container shadow-2xl border p-[50px]">
       <h1>Hello World!</h1>
 
+      <button className="bg-blue-500 text-white px-6 py-2 rounded-lg shadow-md transition duration-300 ease-in-out transform hover:scale-105 hover:bg-blue-600">
+        Click me
+      </button>
+      <div>
+        {questions.question}
+        {questions.items.map((item) => (
+          <div key={item.id}>
+            <video src={item.video} controls />
+            <p>{item.question}</p>
+            <ul>
+              {item.options.map((option) => (
+                <li key={option}>{option}</li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
+
       {loading ? (
         currentUser?.uid ? (
           <div>
+            <input ref={inputRef} type="text" placeholder="New Name" />
             <button
               onClick={() => {
-                handleUserData2(currentUser);
+                updateData(currentUser);
               }}
             >
               test merge
@@ -172,6 +205,7 @@ const Page = () => {
             {userData?.email && (
               <div>
                 <p>Nice: {userData.email}</p>
+                <p>Nice: {userData.name}</p>
               </div>
             )}
           </div>

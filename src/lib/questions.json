@@ -1,0 +1,78 @@
+{
+  "quizTitle": "اختبار التعرف على الانفعالات",
+  "description": "شوف الفيديو وحدد الانفعال الصحيح من بين الاختيارات.",
+  "globalSettings": {
+    "timeLimit": 60,
+    "pointsPerCorrect": 5,
+    "negativePoints": 0
+  },
+  "question": "ما الانفعال الذي يعبر عنه هذا الوجه ؟",
+  "items": [
+    {
+      "id": 1,
+      "video": "videos/01.mp4",
+      "options": ["الدهشة", "السعادة", "الفخر", "الارتياح"],
+      "correctAnswer": ""
+    },
+    {
+      "id": 2,
+      "video": "videos/02.mp4",
+      "options": ["الاشمئزاز", "الغضب", "الإحباط", "القلق"],
+      "correctAnswer": ""
+    },
+    {
+      "id": 3,
+      "video": "videos/03.mp4",
+      "options": ["الخوف", "الندم", "الإحباط", "الحزن"],
+      "correctAnswer": ""
+    },
+    {
+      "id": 4,
+      "video": "videos/04.mp4",
+      "options": ["الريبه", "الحذر", "الشك", "القلق"],
+      "correctAnswer": ""
+    },
+    {
+      "id": 5,
+      "video": "videos/05.mp4",
+      "options": ["الخجل", "الاحراج", "الارتباك", "الشعور بالذنب"],
+      "correctAnswer": ""
+    },
+    {
+      "id": 6,
+      "video": "videos/06.mp4",
+      "options": ["العار", "الخجل", "الذنب", "الإحراج"],
+      "correctAnswer": ""
+    },
+    {
+      "id": 7,
+      "video": "videos/07.mp4",
+      "options": ["البرود", "الاستهتار", "التعب", "اللامبالاة"],
+      "correctAnswer": ""
+    },
+    {
+      "id": 8,
+      "video": "videos/08.mp4",
+      "options": ["الدهشة", "القلق", "الحذر", "الخوف"],
+      "correctAnswer": ""
+    },
+    {
+      "id": 9,
+      "video": "videos/09.mp4",
+      "options": ["الحياء", "الاحراج", "الخجل", "الندم"],
+      "correctAnswer": ""
+    },
+    {
+      "id": 10,
+      "video": "videos/10.mp4",
+      "options": ["الاندهاش", "الحماس", "الخوف", "الفضول"],
+      "correctAnswer": ""
+    },
+    {
+      "id": 11,
+      "video": "videos/11.mp4",
+      "options": ["السخرية", "التعالي", "الاحتقار", "العار"],
+      "correctAnswer": ""
+    }
+  ]
+}
