@@ -10,7 +10,7 @@
   "items": [
     {
       "id": 1,
-      "video": "videos/01.mp4",
+      "video": "./videos/01.mp4",
       "options": ["الدهشة", "السعادة", "الفخر", "الارتياح"],
       "correctAnswer": ""
     },
@@ -35,7 +35,7 @@
     {
       "id": 5,
       "video": "videos/05.mp4",
-      "options": ["الخجل", "الاحراج", "الارتباك", "الشعور بالذنب"],
+      "options": ["الخجل", "الاحراج", "الارتباك", "الذنب"],
       "correctAnswer": ""
     },
     {
@@ -72,6 +72,66 @@
       "id": 11,
       "video": "videos/11.mp4",
       "options": ["السخرية", "التعالي", "الاحتقار", "العار"],
+      "correctAnswer": ""
+    },
+    {
+      "id": 12,
+      "video": "videos/12.mp4",
+      "options": ["السخرية", "المجاملة", "التصنع", "الاهتمام"],
+      "correctAnswer": ""
+    },
+    {
+      "id": 13,
+      "video": "videos/13.mp4",
+      "options": ["الحيرة", "الدهشة", "الارتباك", "الخوف"],
+      "correctAnswer": ""
+    },
+    {
+      "id": 14,
+      "video": "videos/14.mp4",
+      "options": ["الخوف", "الندم", "الحزن", "الاحباط"],
+      "correctAnswer": ""
+    },
+    {
+      "id": 15,
+      "video": "videos/15.mp4",
+      "options": ["الحزن", "الندم", "الذنب", "الخجل"],
+      "correctAnswer": ""
+    },
+    {
+      "id": 16,
+      "video": "videos/16.mp4",
+      "options": ["الاهتمام", "الفضول", "الدهشة", "الحذر"],
+      "correctAnswer": ""
+    },
+    {
+      "id": 17,
+      "video": "videos/17.mp4",
+      "options": ["السخرية", "المزاح", "المجاملة", "الفرح"],
+      "correctAnswer": ""
+    },
+    {
+      "id": 18,
+      "video": "videos/18.mp4",
+      "options": ["التركيز", "الفضول", "الاهتمام", "الفرح"],
+      "correctAnswer": ""
+    },
+    {
+      "id": 19,
+      "video": "videos/19.mp4",
+      "options": ["السعادة", "الامتنان", "البهجة", "الرضا"],
+      "correctAnswer": ""
+    },
+    {
+      "id": 20,
+      "video": "videos/20.mp4",
+      "options": ["الملل", "اللامبالاة", "الاحباط", "الارهاق"],
+      "correctAnswer": ""
+    },
+    {
+      "id": 21,
+      "video": "videos/21.mp4",
+      "options": ["الاستياء", "الغضب", "الاشمئزاز", "القرف"],
       "correctAnswer": ""
     }
   ]

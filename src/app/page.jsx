@@ -1,204 +1,72 @@
 "use client";
 import React, { useEffect, useRef, useState } from "react";
-import { auth, db } from "../lib/firebase";
-import {
-  createUserWithEmailAndPassword,
-  updateProfile,
-  sendEmailVerification,
-  signInWithEmailAndPassword,
-  signOut,
-  onAuthStateChanged,
-} from "firebase/auth";
-import {
-  addDoc,
-  collection,
-  doc,
-  getDoc,
-  onSnapshot,
-  serverTimestamp,
-  setDoc,
-} from "firebase/firestore";
 import questions from "../lib/questions";
+import {
+  handleCurrentUser,
+  handleSignIn,
+  handleSignOut,
+  handleSignUp,
+} from "../lib/auth";
+import Loader from "../components/loader";
 
 const Page = () => {
-  const [email, setemail] = useState("ahmed@yahoo.com");
   const [password, setpassword] = useState("123456789");
+  const [email, setemail] = useState("ahmed@yahoo.com");
   const [name, setname] = useState("Ahmed Jaden");
 
-  const [currentUser, setcurrentUser] = useState([]);
-  const [loading, setloading] = useState(false);
+  const [currentUser, setCurrentUser] = useState([]);
+  const [loading, setLoading] = useState(false);
 
-  const [userData, setuserData] = useState([]);
+  const [userData, setUserData] = useState([]);
 
-  const handleUserData = async (user) => {
+  const withLoading = async (fn) => {
+    setLoading(false);
     try {
-      const addNewUser = await setDoc(doc(db, "users", user.uid), {
-        email: user.email,
-        name: user.displayName,
-        sleep: "yes",
-        events: {
-          score: 50,
-          question: 3,
-        },
-        createdAt: serverTimestamp(),
-      });
-    } catch (error) {
-      console.log("user error handle user data", error);
+      await fn();
+    } finally {
+      setLoading(true);
     }
   };
 
-  const handleUserData2 = async (user) => {
-    try {
-      const addNewUser = await setDoc(
-        doc(db, "users", user.uid),
-        {
-          nice: "hello",
-        },
-        {
-          merge: true,
-        }
-      );
-    } catch (error) {
-      console.log("user error handle user data", error);
-    }
-  };
-
-  const handleGetData = async (user) => {
-    try {
-      const unsub = onSnapshot(doc(db, "users", user.uid), (doc) => {
-        if (doc.exists()) {
-          console.log("current data", doc.data());
-          setuserData(doc.data());
-        }
-        return () => unsub();
-      });
-    } catch (error) {
-      console.log("user error get user data", error);
-    }
-  };
-
-  const handleCurrentUser = () => {
-    const userState = onAuthStateChanged(auth, (user) => {
-      console.log("user state changed", user);
-      setcurrentUser(user);
-
-      if (user) {
-        handleUserData(user);
-        handleGetData(user);
-      }
-
-      setloading(true);
-    });
-    return () => userState();
+  const current = () => {
+    handleCurrentUser(setCurrentUser, setLoading, setUserData);
   };
 
   useEffect(() => {
-    handleCurrentUser();
+    current();
   }, []);
 
-  const handleSignUp = async () => {
-    try {
-      const { user } = await createUserWithEmailAndPassword(
-        auth,
-        email,
-        password
-      );
-      setloading(false);
-
-      await updateProfile(user, {
-        displayName: name,
-      });
-
-      await sendEmailVerification(user);
-
-      handleCurrentUser();
-
-      setloading(true);
-    } catch (error) {
-      console.log("user error sign up ", error);
-    }
-  };
-
-  const handleSignIn = async () => {
-    try {
-      const { user } = await signInWithEmailAndPassword(auth, email, password);
-
-      handleCurrentUser();
-    } catch (error) {
-      console.log("user error sign in ", error);
-    }
-  };
-
-  const handleResendVerification = async () => {
-    try {
-      await sendEmailVerification(user);
-    } catch (error) {
-      console.log("errrrr", error);
-    }
-  };
-
-  const handleSignOut = async () => {
-    try {
-      await signOut(auth);
-    } catch (err) {
-      console.log("user error sign out", err);
-    }
-  };
-
-  const inputRef = useRef(null);
-  const updateData = async (user) => {
-    try {
-      const update = await setDoc(
-        doc(db, "users", user.uid),
-        {
-          name: inputRef.current.value,
-        },
-        {
-          merge: true,
-        }
-      );
-    } catch (error) {
-      console.log("user error handle user data", error);
-    }
-  };
-
   return (
-    <main className="flex flex-col gap-[100px] justify-center items-center h-[auto] w-[500px] container shadow-2xl border p-[50px]">
-      <h1>Hello World!</h1>
-
-      <button className="bg-blue-500 text-white px-6 py-2 rounded-lg shadow-md transition duration-300 ease-in-out transform hover:scale-105 hover:bg-blue-600">
-        Click me
-      </button>
-      <div>
-        {questions.question}
+    <main className="">
+      {/* <div className="flex flex-wrap gap-12 justify-center">
         {questions.items.map((item) => (
-          <div key={item.id}>
-            <video src={item.video} controls />
-            <p>{item.question}</p>
-            <ul>
-              {item.options.map((option) => (
-                <li key={option}>{option}</li>
-              ))}
-            </ul>
+          <div key={item.id} className="flex flex-col items-center">
+            <div className="rounded-xl shadow-lg overfolow-hidden">
+              <video
+                onContextMenu={(e) => e.preventDefault()}
+                src={item.video}
+                className="aspect-square w-[200px] rounded-xl object-cover"
+                autoPlay
+                muted
+                loop
+                playsInline
+              />
+            </div>
           </div>
         ))}
-      </div>
+      </div> */}
 
       {loading ? (
         currentUser?.uid ? (
           <div>
-            <input ref={inputRef} type="text" placeholder="New Name" />
-            <button
-              onClick={() => {
-                updateData(currentUser);
-              }}
-            >
-              test merge
-            </button>
-            <p>Display Name: {currentUser.displayName}</p>
             <p>Email: {currentUser.email}</p>
             <p>verified: {currentUser.emailVerified ? "Yes" : "No"}</p>
-            <button onClick={handleSignOut} className="cursor-pointer">
+            <button
+              className="cursor-pointer"
+              onClick={() => {
+                withLoading(() => handleSignOut(current));
+              }}
+            >
               Sign Out
             </button>
 
@@ -211,7 +79,7 @@ const Page = () => {
           </div>
         ) : (
           <>
-            <div className="flex flex-col gap-4">
+            <div className="flex flex-col gap-4 w-full max-w-sm">
               <input
                 type="text"
                 value={email}
@@ -230,11 +98,16 @@ const Page = () => {
                 onChange={(e) => setname(e.target.value)}
                 placeholder="Name"
               />
-              <button onClick={handleSignUp} className="cursor-pointer">
+              <button
+                className="cursor-pointer"
+                onClick={() => {
+                  withLoading(() => handleSignUp(email, password, current));
+                }}
+              >
                 Sign Up
               </button>
             </div>
-            <div className="flex flex-col gap-4">
+            <div className="flex flex-col gap-4 w-full max-w-sm">
               <input
                 type="text"
                 value={email}
@@ -247,20 +120,19 @@ const Page = () => {
                 onChange={(e) => setpassword(e.target.value)}
                 placeholder="Password"
               />
-              <button onClick={handleSignIn} className="cursor-pointer">
-                Sign In
-              </button>
               <button
-                onClick={handleResendVerification}
                 className="cursor-pointer"
+                onClick={() => {
+                  withLoading(() => handleSignIn(email, password, current));
+                }}
               >
-                Resend link
+                Log In
               </button>
             </div>
           </>
         )
       ) : (
-        <div>loading ....</div>
+        <Loader />
       )}
     </main>
   );
