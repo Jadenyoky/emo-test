@@ -8,13 +8,14 @@ import {
   handleSignUp,
 } from "../lib/auth";
 import Loader from "../components/loader";
+import { Button } from "../components/elements";
 
 const Page = () => {
   const [password, setpassword] = useState("123456789");
   const [email, setemail] = useState("ahmed@yahoo.com");
   const [name, setname] = useState("Ahmed Jaden");
 
-  const [currentUser, setCurrentUser] = useState([]);
+  const [currentUser, setCurrentUser] = useState(null);
   const [loading, setLoading] = useState(false);
 
   const [userData, setUserData] = useState([]);
@@ -23,6 +24,7 @@ const Page = () => {
     setLoading(false);
     try {
       await fn();
+      current();
     } finally {
       setLoading(true);
     }
@@ -35,6 +37,13 @@ const Page = () => {
   useEffect(() => {
     current();
   }, []);
+
+  const handleNavigateToTest = () => {
+    console.log("Navigating to test...");
+  };
+  const handleNavigateToLogin = () => {
+    console.log("Navigating to login...");
+  };
 
   return (
     <main className="min-h-svh grid grid-cols-2 max-md:grid-cols-1 gap-8 max-md:gap-0 items-center justify-center place-items-center">
@@ -53,14 +62,60 @@ const Page = () => {
             </h1>
           </div>
         </div>
-        <div className="flex justify-between gap-4">
-          <button className="flex-1 text-xl text-nowrap cursor-pointer border border-[var(--teal)] rounded-full px-4 py-2 text-[var(--teal)] hover:bg-[var(--teal)] hover:text-white transition">
-            Sign up
-          </button>
-          <button className="flex-1 text-xl text-nowrap cursor-pointer border border-[var(--teal)] rounded-full px-4 py-2 text-[var(--teal)] hover:bg-[var(--teal)] hover:text-white transition">
-            Login
-          </button>
-        </div>
+
+        {loading ? (
+          currentUser ? (
+            <div className="flex flex-wrap justify-between gap-4 items-center">
+              <div className="flex-1">
+                <Button
+                  title={"Start Test"}
+                  color1={"var(--gold)"}
+                  color2={"var(--teal)"}
+                  onClick={() => {
+                    handleNavigateToTest();
+                  }}
+                />
+              </div>
+
+              <div className="flex-1">
+                <Button
+                  title={"Logout"}
+                  color1={"var(--sky)"}
+                  color2={"var(--red)"}
+                  onClick={() => {
+                    withLoading(handleSignOut);
+                  }}
+                />
+              </div>
+            </div>
+          ) : (
+            <div className="flex flex-wrap justify-between gap-4 items-center">
+              <div className="flex-1">
+                <Button
+                  title={"Sign up"}
+                  color1={"var(--purple)"}
+                  color2={"var(--teal)"}
+                  onClick={() => {
+                    handleNavigateToTest();
+                  }}
+                />
+              </div>
+
+              <div className="flex-1">
+                <Button
+                  title={"Login"}
+                  color1={"var(--sky)"}
+                  color2={"var(--teal)"}
+                  onClick={() => {
+                    handleNavigateToLogin();
+                  }}
+                />
+              </div>
+            </div>
+          )
+        ) : (
+          <Loader />
+        )}
       </div>
 
       <img
