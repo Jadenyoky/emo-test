@@ -37,103 +37,37 @@ const Page = () => {
   }, []);
 
   return (
-    <main className="">
-      {/* <div className="flex flex-wrap gap-12 justify-center">
-        {questions.items.map((item) => (
-          <div key={item.id} className="flex flex-col items-center">
-            <div className="rounded-xl shadow-lg overfolow-hidden">
-              <video
-                onContextMenu={(e) => e.preventDefault()}
-                src={item.video}
-                className="aspect-square w-[200px] rounded-xl object-cover"
-                autoPlay
-                muted
-                loop
-                playsInline
-              />
-            </div>
+    <main className="min-h-svh grid grid-cols-2 max-md:grid-cols-1 gap-8 max-md:gap-0 items-center justify-center place-items-center">
+      <div className="flex flex-col gap-16 h-[50vh] max-md:h-[auto] justify-evenly max-md:justify-center max-md:w-[80%]">
+        <div className="flex flex-col capitalize gap-4  items-center">
+          <div className="relative w-fit ">
+            <div className="rounded-2xl h-[50%] w-[50px] absolute bottom-0 right-0 bg-[var(--gold)] z-[-1] rotate-2" />
+            <h1 className=" text-3xl max-md:text-xl font-semibold text-[var(--red)] text-center">
+              Welcome to
+            </h1>
           </div>
-        ))}
-      </div> */}
-
-      {loading ? (
-        currentUser?.uid ? (
-          <div>
-            <p>Email: {currentUser.email}</p>
-            <p>verified: {currentUser.emailVerified ? "Yes" : "No"}</p>
-            <button
-              className="cursor-pointer"
-              onClick={() => {
-                withLoading(() => handleSignOut(current));
-              }}
-            >
-              Sign Out
-            </button>
-
-            {userData?.email && (
-              <div>
-                <p>Nice: {userData.email}</p>
-                <p>Nice: {userData.name}</p>
-              </div>
-            )}
+          <div className="relative w-fit">
+            <div className="rounded-2xl h-[50%] w-[150px] absolute bottom-0 left-0 bg-[var(--gold)] z-[-1] -rotate-2" />
+            <h1 className="text-5xl max-md:text-3xl font-bold text-[var(--sky)]">
+              Emo Test App
+            </h1>
           </div>
-        ) : (
-          <>
-            <div className="flex flex-col gap-4 w-full max-w-sm">
-              <input
-                type="text"
-                value={email}
-                onChange={(e) => setemail(e.target.value)}
-                placeholder="Email"
-              />
-              <input
-                type="password"
-                value={password}
-                onChange={(e) => setpassword(e.target.value)}
-                placeholder="Password"
-              />
-              <input
-                type="text"
-                value={name}
-                onChange={(e) => setname(e.target.value)}
-                placeholder="Name"
-              />
-              <button
-                className="cursor-pointer"
-                onClick={() => {
-                  withLoading(() => handleSignUp(email, password, current));
-                }}
-              >
-                Sign Up
-              </button>
-            </div>
-            <div className="flex flex-col gap-4 w-full max-w-sm">
-              <input
-                type="text"
-                value={email}
-                onChange={(e) => setemail(e.target.value)}
-                placeholder="Email"
-              />
-              <input
-                type="password"
-                value={password}
-                onChange={(e) => setpassword(e.target.value)}
-                placeholder="Password"
-              />
-              <button
-                className="cursor-pointer"
-                onClick={() => {
-                  withLoading(() => handleSignIn(email, password, current));
-                }}
-              >
-                Log In
-              </button>
-            </div>
-          </>
-        )
-      ) : (
-        <Loader />
-      )}
+        </div>
+        <div className="flex justify-between gap-4">
+          <button className="flex-1 text-xl text-nowrap cursor-pointer border border-[var(--teal)] rounded-full px-4 py-2 text-[var(--teal)] hover:bg-[var(--teal)] hover:text-white transition">
+            Sign up
+          </button>
+          <button className="flex-1 text-xl text-nowrap cursor-pointer border border-[var(--teal)] rounded-full px-4 py-2 text-[var(--teal)] hover:bg-[var(--teal)] hover:text-white transition">
+            Login
+          </button>
+        </div>
+      </div>
+
+      <img
+        className="max-md:w-[500px] object-cover "
+        src="/pics/hero.jpg"
+        alt=""
+      />
     </main>
   );
 };

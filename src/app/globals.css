@@ -1,5 +1,21 @@
 @import "tailwindcss";
 
+/* fonts | Unbounded & Space Grotesk & Changa */
+
+:root {
+  --gold: #FFDD5E;
+  --teal: #09957F;
+  --black: #19180F;
+  --red: #F67B7B;
+  --smokey: #F5F3EF;
+  --sky: #84CCF8;
+  --pink: #FFBEF4;
+  --purple: #A698FE
+}
+
+body {
+  font-family: 'changa';
+}
 
 /* loader styles */
 .loader {
