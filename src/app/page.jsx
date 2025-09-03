@@ -50,13 +50,13 @@ const Page = () => {
       <div className="flex flex-col gap-16 h-[50vh] max-md:h-[auto] justify-evenly max-md:justify-center max-md:w-[80%]">
         <div className="flex flex-col capitalize gap-4  items-center">
           <div className="relative w-fit ">
-            <div className="rounded-2xl h-[50%] w-[50px] absolute bottom-0 right-0 bg-[var(--gold)] z-[-1] rotate-2" />
+            <div className="rounded-2xl h-[50%] w-[50px] absolute bottom-0 right-0 bg-[var(--gold)] z-[-1] rotate-2 opacity-50" />
             <h1 className=" text-3xl max-md:text-xl font-semibold text-[var(--red)] text-center">
               Welcome to
             </h1>
           </div>
           <div className="relative w-fit">
-            <div className="rounded-2xl h-[50%] w-[150px] absolute bottom-0 left-0 bg-[var(--gold)] z-[-1] -rotate-2" />
+            <div className="rounded-2xl h-[50%] w-[150px] absolute bottom-0 left-0 bg-[var(--gold)] z-[-1] -rotate-2 opacity-50" />
             <h1 className="text-5xl max-md:text-3xl font-bold text-[var(--sky)]">
               Emo Test App
             </h1>
