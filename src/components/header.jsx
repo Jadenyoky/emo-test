@@ -1,6 +1,7 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import { handleCurrentUser, handleSignOut } from "@/lib/auth";
+import { usePathname } from "next/navigation";
 
 const Header = () => {
   const [loading, setLoading] = useState(false);
@@ -8,6 +9,8 @@ const Header = () => {
   const [userData, setUserData] = useState([]);
 
   const [settings, setSettings] = useState(false);
+
+  const path = usePathname();
 
   const current = () => {
     handleCurrentUser(setCurrentUser, setLoading, setUserData);
@@ -17,7 +20,7 @@ const Header = () => {
     current();
   }, []);
 
-  if (!currentUser) return null;
+  if (!currentUser || path === "/") return null;
 
   return (
     <div className="sticky top-0 z-10 bg-[white] border-b border-[var(--sky)] flex items-center justify-baseline px-6 py-2 gap-8">
@@ -34,7 +37,7 @@ const Header = () => {
           />
         </div>
         <p className="text-[var(--teal)] capitalize rounded-full px-4 py-1 shadow-[0px_0px_2px_var(--teal)] truncate max-sm:hidden">
-          ahmed hussien
+          {currentUser?.displayName}
         </p>
       </div>
       <div className="flex items-center gap-3 p-1">

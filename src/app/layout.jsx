@@ -1,5 +1,6 @@
 import Header from "../components/header";
 import "./globals.css";
+import "@flaticon/flaticon-uicons/css/all/all.css";
 
 export const metadata = {
   title: "Create Next App",
