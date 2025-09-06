@@ -37,8 +37,8 @@ const Page = () => {
 
   return (
     <main className="min-h-svh grid grid-cols-2 max-md:grid-cols-1 gap-8 max-md:gap-0 items-center justify-center place-items-center">
-      <div className="flex flex-col gap-16 max-md:gap-8 h-[50vh] max-md:h-[auto] justify-evenly max-md:justify-center max-md:w-[80%]">
-        <div className="flex flex-col capitalize gap-4 items-center max-md:pt-5">
+      <div className="max-md:pt-8 flex flex-col gap-16 max-md:gap-8 h-[50vh] max-md:h-[full] justify-evenly max-md:justify-between max-md:w-[80%] ">
+        <div className="flex flex-col capitalize gap-4 items-center ">
           <div className="relative w-fit ">
             <div className="rounded-2xl h-[50%] w-[50px] absolute bottom-0 right-0 bg-[var(--gold)] z-[-1] rotate-2 opacity-50" />
             <h1 className=" text-3xl max-md:text-xl font-semibold text-[var(--red)] text-center">
@@ -55,7 +55,7 @@ const Page = () => {
 
         {loading ? (
           currentUser ? (
-            <div className="flex flex-col justify-between gap-8 items-center">
+            <div className="max-md:h-full flex flex-col justify-center gap-8 items-center">
               <div className="flex justify-between flex-wrap w-full gap-4 px-2">
                 <div className="relative flex flex-col gap-1">
                   <div className="rounded-2xl h-[50%] w-[50px] absolute bottom-0 right-0 bg-[var(--gold)] z-[-1] rotate-2 opacity-50" />
@@ -72,6 +72,7 @@ const Page = () => {
                   </p>
                 </div>
               </div>
+
               <div className="w-full flex flex-wrap justify-between gap-4 items-center">
                 <div className="flex-1">
                   <Button
@@ -97,7 +98,7 @@ const Page = () => {
               </div>
             </div>
           ) : (
-            <div className="flex flex-wrap justify-between gap-4 items-center">
+            <div className="max-md:h-full flex flex-wrap justify-between gap-4 items-center">
               <div className="flex-1">
                 <Button
                   title={"Sign up"}
@@ -125,12 +126,14 @@ const Page = () => {
             </div>
           )
         ) : (
-          <Loader />
+          <div className="h-full flex items-center justify-center">
+            <Loader />
+          </div>
         )}
       </div>
 
       <img
-        className="max-md:w-[400px] object-cover "
+        className="max-md:w-[50vh] object-cover "
         src="/pics/hero.jpg"
         alt=""
       />
