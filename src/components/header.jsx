@@ -10,8 +10,6 @@ const Header = () => {
 
   const [settings, setSettings] = useState(false);
 
-  const path = usePathname();
-
   const current = () => {
     handleCurrentUser(setCurrentUser, setLoading, setUserData);
   };
@@ -20,7 +18,7 @@ const Header = () => {
     current();
   }, []);
 
-  if (!currentUser || path === "/") return null;
+  if (!currentUser) return null;
 
   return (
     <div className="sticky top-0 z-10 bg-[white] border-b border-[var(--sky)] flex items-center justify-baseline px-6 py-2 gap-8">

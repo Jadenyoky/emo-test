@@ -1,4 +1,3 @@
-import Header from "../components/header";
 import "./globals.css";
 import "@flaticon/flaticon-uicons/css/all/all.css";
 
@@ -22,10 +21,7 @@ export default function RootLayout({ children }) {
           rel="stylesheet"
         />
       </head>
-      <body className="min-h-svh flex flex-col gap-8">
-        <Header />
-        {children}
-      </body>
+      <body>{children}</body>
     </html>
   );
 }

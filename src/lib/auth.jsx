@@ -68,7 +68,7 @@ export const handleSignOut = async () => {
 };
 
 const firebaseErrors = {
-  "auth/email-already-in-use": "Email is taken",
+  "auth/email-already-in-use": "email already in use",
   "auth/invalid-email": "Invalid email",
   "auth/user-disabled": "User disabled",
   "auth/user-not-found": "User not found",
