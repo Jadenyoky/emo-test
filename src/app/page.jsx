@@ -37,7 +37,7 @@ const Page = () => {
 
   return (
     <main className="min-h-svh grid grid-cols-2 max-md:grid-cols-1 gap-8 max-md:gap-0 items-center justify-center place-items-center">
-      <div className="max-md:pt-8 flex flex-col gap-16 max-md:gap-8 h-[50vh] max-md:h-[full] justify-evenly max-md:justify-between max-md:w-[80%] ">
+      <div className="max-md:pt-8 flex flex-col gap-16 max-md:gap-8 h-[50vh] max-md:h-full justify-evenly max-md:justify-between max-md:w-[80%] ">
         <div className="flex flex-col capitalize gap-4 items-center ">
           <div className="relative w-fit ">
             <div className="rounded-2xl h-[50%] w-[50px] absolute bottom-0 right-0 bg-[var(--gold)] z-[-1] rotate-2 opacity-50" />
@@ -133,7 +133,7 @@ const Page = () => {
       </div>
 
       <img
-        className="max-md:w-[50vh] object-cover "
+        className="max-md:w-[300px] object-cover "
         src="/pics/hero.jpg"
         alt=""
       />
