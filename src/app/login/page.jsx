@@ -1,11 +1,13 @@
 "use client";
 import { Button } from "@/components/elements";
 import { useRouter } from "next/navigation";
-import React from "react";
+import React, { useEffect } from "react";
 import { loginSchema } from "@/lib/schema";
 import { useForm } from "react-hook-form";
 import { handleLogin } from "@/lib/auth";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { auth } from "@/lib/firebase";
 
 const Page = () => {
   const router = useRouter();
@@ -47,9 +49,14 @@ const Page = () => {
 
   return (
     <form
-      onSubmit={handleSubmit((data) => {
-        handleLogin(data, setError);
-        console.log(data);
+      onSubmit={handleSubmit(async (data) => {
+        const success = await handleLogin(data, setError);
+        if (success) {
+          handleNavigate("/");
+          // console.log(data);
+        } else {
+          console.log("error in login");
+        }
       })}
     >
       <main

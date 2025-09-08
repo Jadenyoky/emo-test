@@ -1,5 +1,7 @@
 import "./globals.css";
 import "@flaticon/flaticon-uicons/css/all/all.css";
+import AuthProvider from "@/lib/authProvider";
+import QuizProvider from "@/lib/quizProvider";
 
 export const metadata = {
   title: "Create Next App",
@@ -21,7 +23,11 @@ export default function RootLayout({ children }) {
           rel="stylesheet"
         />
       </head>
-      <body>{children}</body>
+      <body>
+        <AuthProvider>
+          <QuizProvider>{children}</QuizProvider>
+        </AuthProvider>
+      </body>
     </html>
   );
 }

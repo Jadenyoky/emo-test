@@ -25,7 +25,7 @@ export const handleGetData = async (user, setUserData) => {
     const dataSaved = await getDoc(doc(db, "users", user.uid));
 
     if (dataSaved.exists()) {
-      console.log("User data:", dataSaved.data());
+      // console.log("User data:", dataSaved.data());
       setUserData(dataSaved.data());
     } else {
       console.log("No user data found");

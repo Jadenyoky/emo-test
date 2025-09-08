@@ -6,11 +6,12 @@ import { signUpSchema } from "@/lib/schema";
 import { useForm } from "react-hook-form";
 import { handleSignUp } from "@/lib/auth";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { useAuth } from "@/lib/authProvider";
 
 const Page = () => {
-  const router = useRouter();
+  const { user, loading } = useAuth();
 
-  const [name, setname] = useState(null);
+  const router = useRouter();
 
   const handleNavigate = (location) => {
     router.push(location);
@@ -56,30 +57,16 @@ const Page = () => {
     },
   ];
 
-  const [currentUser, setCurrentUser] = useState(null);
-  const [loading, setLoading] = useState(false);
-
-  const [userData, setUserData] = useState([]);
-
-  const withLoading = async (fn) => {
-    setLoading(false);
-    try {
-      await fn();
-      current();
-    } finally {
-      setLoading(true);
-    }
-  };
-
-  const current = () => {
-    handleCurrentUser(setCurrentUser, setLoading, setUserData);
-  };
-
   return (
     <form
-      onSubmit={handleSubmit((data) => {
-        handleSignUp(data, setError, name, current);
-        console.log(data);
+      onSubmit={handleSubmit(async (data) => {
+        const success = await handleSignUp(data, setError, data.name);
+
+        if (success) {
+          handleNavigate("/");
+        } else {
+          console.log("Sign up failed, stay on page.");
+        }
       })}
     >
       <main
@@ -105,14 +92,6 @@ const Page = () => {
                 <div
                   key={i}
                   className="flex flex-col gap-1 max-w-[100%] w-[300px]"
-                  onInput={
-                    input.label.toLowerCase() === "name"
-                      ? (e) => {
-                          setname(e.target.value);
-                          console.log(e.target.value);
-                        }
-                      : null
-                  }
                 >
                   <div className="flex rounded-full border border-[var(--sky)] px-4 py-2 items-center gap-4">
                     <i className={`${input.icon} mt-1.5 text-[var(--sky)]`}></i>

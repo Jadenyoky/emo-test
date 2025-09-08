@@ -1,32 +1,17 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import { handleCurrentUser, handleSignOut } from "../lib/auth";
+import { handleSignOut } from "../lib/auth";
 import Loader from "../components/loader";
 import { Button } from "../components/elements";
 import { useRouter } from "next/navigation";
+import { useAuth } from "@/lib/authProvider";
+import { useQuiz } from "@/lib/quizProvider";
 
 const Page = () => {
-  const [currentUser, setCurrentUser] = useState(null);
-  const [loading, setLoading] = useState(false);
-
-  const [userData, setUserData] = useState([]);
-
-  const withLoading = async (fn) => {
-    setLoading(false);
-    try {
-      await fn();
-      current();
-    } finally {
-      setLoading(true);
-    }
-  };
-
-  const current = () => {
-    handleCurrentUser(setCurrentUser, setLoading, setUserData);
-  };
-
+  const { user, loading } = useAuth();
+  const { quizData } = useQuiz();
   useEffect(() => {
-    current();
+    console.log(quizData);
   }, []);
 
   const router = useRouter();
@@ -41,34 +26,38 @@ const Page = () => {
         <div className="flex flex-col capitalize gap-4 items-center ">
           <div className="relative w-fit ">
             <div className="rounded-2xl h-[50%] w-[50px] absolute bottom-0 right-0 bg-[var(--gold)] z-[-1] rotate-2 opacity-50" />
-            <h1 className=" text-3xl max-md:text-xl font-semibold text-[var(--red)] text-center">
-              Welcome to
+            <h1 className=" text-3xl max-md:text-xl font-semibold text-[var(--red)] text-center capitalize">
+              welcome to
             </h1>
           </div>
           <div className="relative w-fit">
             <div className="rounded-2xl h-[50%] w-[150px] absolute bottom-0 left-0 bg-[var(--gold)] z-[-1] -rotate-2 opacity-50" />
-            <h1 className="text-5xl max-md:text-3xl font-bold text-[var(--sky)]">
-              Emo Test App
+            <h1 className=" capitalize text-5xl max-md:text-3xl font-bold text-[var(--sky)]">
+              emo quiz app
             </h1>
           </div>
         </div>
 
         {loading ? (
-          currentUser ? (
+          user ? (
             <div className="max-md:h-full flex flex-col justify-center gap-8 items-center">
-              <div className="flex justify-between flex-wrap w-full gap-4 px-2">
-                <div className="relative flex flex-col gap-1">
+              <div className="flex justify-between flex-wrap w-full gap-4 px-2 ">
+                <div className="relative flex flex-col gap-1 ">
                   <div className="rounded-2xl h-[50%] w-[50px] absolute bottom-0 right-0 bg-[var(--gold)] z-[-1] rotate-2 opacity-50" />
-                  <p className="text-sm text-[var(--teal)]">Hello ,</p>
+                  <p className="text-sm text-[var(--teal)] font-[Unbounded]">
+                    Hello ,
+                  </p>
                   <p className="font-semibold text-2xl text-[var(--teal)]">
-                    {currentUser?.displayName}
+                    {user?.displayName}
                   </p>
                 </div>
                 <div className="relative flex flex-col gap-1">
                   <div className="rounded-2xl h-[50%] w-[50px] absolute bottom-0 right-0 bg-[var(--gold)] z-[-1] rotate-2 opacity-50" />
-                  <p className="text-sm text-[var(--red)]">Score ,</p>
+                  <p className="text-sm text-[var(--red)] font-[Unbounded]">
+                    Score ,
+                  </p>
                   <p className="font-semibold text-2xl font-[Space_Grotesk] text-[var(--red)]">
-                    {userData?.events?.score}
+                    {quizData?.score}
                   </p>
                 </div>
               </div>
@@ -76,11 +65,11 @@ const Page = () => {
               <div className="w-full flex flex-wrap justify-between gap-4 items-center">
                 <div className="flex-1">
                   <Button
-                    title={"Start Test"}
+                    title={"Start Quiz"}
                     color1={"var(--gold)"}
                     color2={"var(--teal)"}
                     onClick={() => {
-                      handleNavigate("/test");
+                      handleNavigate("/quiz");
                     }}
                   />
                 </div>
@@ -91,7 +80,7 @@ const Page = () => {
                     color1={"var(--sky)"}
                     color2={"var(--red)"}
                     onClick={() => {
-                      withLoading(handleSignOut);
+                      handleSignOut();
                     }}
                   />
                 </div>
@@ -112,9 +101,6 @@ const Page = () => {
 
               <div className="flex-1">
                 <Button
-                  // title={"Login"}
-                  // color1={"var(--sky)"}
-                  // color2={"var(--teal)"}
                   title={"Login"}
                   color1={"var(--gold)"}
                   color2={"var(--red)"}

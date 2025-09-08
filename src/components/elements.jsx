@@ -4,9 +4,9 @@ import styled from "styled-components";
 export const Button = ({ title, onClick, textColor, color1, color2, type }) => {
   return (
     <StyledWrapperButton
-      colorone={color1}
-      colortwo={color2}
-      textcolor={textColor}
+      $colorone={color1}
+      $colortwo={color2}
+      $textcolor={textColor}
     >
       <button
         type={type ? type : "button"}
@@ -48,13 +48,13 @@ const StyledWrapperButton = styled.div`
     transition: all 0.25s ease;
     background: radial-gradient(
         65.28% 65.28% at 50% 100%,
-        ${(props) => props.color} 0%,
+        ${(props) => props.$colorone} 0%,
         rgba(223, 113, 255, 0) 100%
       ),
       linear-gradient(
         0deg,
-        ${(props) => props.colortwo},
-        ${(props) => props.colortwo}
+        ${(props) => props.$colortwo},
+        ${(props) => props.$colortwo}
       );
     border-radius: var(--round);
     border: none;
@@ -233,7 +233,7 @@ const StyledWrapperButton = styled.div`
     line-height: 1.5;
     transition: color 0.2s ease-in-out;
     gap: 8px;
-    color: ${(props) => (props.textcolor ? props.textcolor : "white")};
+    color: ${(props) => (props.$textcolor ? props.$textcolor : "white")};
   }
 
   .inner svg.icon {
