@@ -8,10 +8,13 @@
   --black: #19180F;
   --red: #F67B7B;
   --smokey: #F5F3EF;
-  --sky: #84CCF8;
+  --sky: rgb(132, 204, 248);
   --pink: #FFBEF4;
-  --purple: #A698FE;
-  --warm: #F9E5DA
+  --purple: #a698fe;
+  --warm: #F9E5DA;
+  --shadow: 0px 0px 0px 1px rgba(166, 152, 254, 50%);
+  --shadow2: 0px 0px 20px rgb(132, 204, 248, 50%);
+  --shadow3: 0px 0px 20px rgb(166, 152, 254, 50%);
 }
 
 body {
