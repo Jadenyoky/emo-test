@@ -3,6 +3,7 @@ import React, { createContext, useContext, useEffect, useState } from "react";
 import { useAuth } from "./authProvider";
 import { doc, onSnapshot, setDoc, updateDoc } from "firebase/firestore";
 import { db } from "./firebase";
+import { usePathname } from "next/navigation";
 
 const QuizContext = createContext(null);
 
@@ -15,7 +16,11 @@ const QuizProvider = ({ children }) => {
   const [quizData, setquizData] = useState(null);
   const [quizLoading, setquizLoading] = useState(false);
 
+  const pathname = usePathname();
+
   useEffect(() => {
+    setquizLoading(false);
+
     if (!user) {
       setquizData(null);
       setquizLoading(true);
@@ -41,8 +46,8 @@ const QuizProvider = ({ children }) => {
       setquizLoading(true);
     });
 
-    return () => unsub();
-  });
+    // return () => unsub();
+  }, [pathname, user]);
 
   const updateQuizData = async (data) => {
     if (!user) return;
@@ -56,9 +61,9 @@ const QuizProvider = ({ children }) => {
     console.log("updatedddd", updated);
   };
 
-  if (!quizLoading) {
-    return <div>loading data ....</div>;
-  }
+  // if (!quizLoading) {
+  //   return null;
+  // }
 
   return (
     <QuizContext.Provider value={{ quizData, updateQuizData, quizLoading }}>

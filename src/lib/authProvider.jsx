@@ -32,7 +32,7 @@ const AuthProvider = ({ children }) => {
       setloading(true);
     });
     return () => unsub();
-  }, [pathname, router]);
+  }, [pathname]);
 
   if (!loading)
     return (

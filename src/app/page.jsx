@@ -9,7 +9,7 @@ import { useQuiz } from "@/lib/quizProvider";
 
 const Page = () => {
   const { user, loading } = useAuth();
-  const { quizData } = useQuiz();
+  const { quizData, quizLoading } = useQuiz();
   useEffect(() => {
     console.log(quizData);
   }, []);
@@ -42,24 +42,32 @@ const Page = () => {
           user ? (
             <div className="max-md:h-full flex flex-col justify-center gap-8 items-center">
               <div className="flex justify-between flex-wrap w-full gap-4 px-2 ">
-                <div className="relative flex flex-col gap-1 ">
-                  <div className="rounded-2xl h-[50%] w-[50px] absolute bottom-0 right-0 bg-[var(--gold)] z-[-1] rotate-2 opacity-50" />
-                  <p className="text-sm text-[var(--teal)] font-[Unbounded]">
-                    Hello ,
-                  </p>
-                  <p className="font-semibold text-2xl text-[var(--teal)]">
-                    {user?.displayName}
-                  </p>
-                </div>
-                <div className="relative flex flex-col gap-1">
-                  <div className="rounded-2xl h-[50%] w-[50px] absolute bottom-0 right-0 bg-[var(--gold)] z-[-1] rotate-2 opacity-50" />
-                  <p className="text-sm text-[var(--red)] font-[Unbounded]">
-                    Score ,
-                  </p>
-                  <p className="font-semibold text-2xl font-[Space_Grotesk] text-[var(--red)]">
-                    {quizData?.score}
-                  </p>
-                </div>
+                {quizLoading ? (
+                  <div className="relative flex flex-col gap-1 ">
+                    <div className="rounded-2xl h-[50%] w-[50px] absolute bottom-0 right-0 bg-[var(--gold)] z-[-1] rotate-2 opacity-50" />
+                    <p className="text-sm text-[var(--teal)] font-[Unbounded]">
+                      Hello ,
+                    </p>
+                    <p className="font-semibold text-2xl text-[var(--teal)]">
+                      {user?.displayName}
+                    </p>
+                  </div>
+                ) : (
+                  <Loader />
+                )}
+                {quizLoading ? (
+                  <div className="relative flex flex-col gap-1">
+                    <div className="rounded-2xl h-[50%] w-[50px] absolute bottom-0 right-0 bg-[var(--gold)] z-[-1] rotate-2 opacity-50" />
+                    <p className="text-sm text-[var(--red)] font-[Unbounded]">
+                      Score ,
+                    </p>
+                    <p className="font-semibold text-2xl font-[Space_Grotesk] text-[var(--red)]">
+                      {quizData?.score}
+                    </p>
+                  </div>
+                ) : (
+                  <Loader />
+                )}
               </div>
 
               <div className="w-full flex flex-wrap justify-between gap-4 items-center">
