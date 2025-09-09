@@ -264,29 +264,20 @@ const StyledWrapperButton = styled.div`
   }
 `;
 
-export const Radio = () => {
+import quiz from "@/lib/quiz.json";
+
+export const Radio = ({ quizItemId }) => {
   return (
     <StyledWrapper className="flex-1 *:flex-1 bg-[var(--white)] rounded-2xl px-4 py-4 shadow-[var(--shadow2)] font-[changa]">
-      <label className="radio-label ">
-        <input type="radio" name="option" className="radio-input" />
-        <span className="radio-custom" />
-        <span className="radio-text">الانضباط</span>
-      </label>
-      <label className="radio-label ">
-        <input type="radio" name="option" className="radio-input" />
-        <span className="radio-custom" />
-        <span className="radio-text">الانضباط</span>
-      </label>
-      <label className="radio-label ">
-        <input type="radio" name="option" className="radio-input" />
-        <span className="radio-custom" />
-        <span className="radio-text">الانضباط</span>
-      </label>
-      <label className="radio-label ">
-        <input type="radio" name="option" className="radio-input" />
-        <span className="radio-custom" />
-        <span className="radio-text">الانضباط</span>
-      </label>
+      {quiz.items[quizItemId].options.map((option, index) => {
+        return (
+          <label className="radio-label " key={index}>
+            <input type="radio" name="option" className="radio-input" />
+            <span className="radio-custom" />
+            <span className="radio-text">{option}</span>
+          </label>
+        );
+      })}
     </StyledWrapper>
   );
 };
@@ -296,7 +287,7 @@ const StyledWrapper = styled.div`
   flex-direction: column;
   justify-content: space-between;
   align-items: stretch;
-  gap: 10px;
+  gap: 15px;
   direction: rtl;
 
   .radio-label {

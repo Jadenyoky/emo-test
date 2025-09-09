@@ -19,16 +19,16 @@ const Header = ({ handleNavigate }) => {
   if (!user) return null;
 
   return (
-    <div className="z-[100] flex flex-wrap justify-between items-center ">
+    <div className="flex flex-wrap justify-between items-center ">
       {menu && (
-        <div className="fixed h-svh w-full top-0 left-0 flex flex-col justify-center max-md:justify-end items-center backdrop-blur-lg ">
+        <div className=" z-[200] fixed h-svh w-full top-0 left-0 flex flex-col justify-center max-md:justify-end items-center backdrop-blur-lg ">
           <div
             className="fixed z-[-1] h-svh w-full top-0 left-0  bg-[var(--black)] opacity-50"
             onClick={() => {
               handleMenu();
             }}
           />
-          <div className="bg-white rounded-2xl px-16 py-8 drop-shadow-2xl max-md:w-[90%] max-md:m-5 flex justify-center shadow-[var(--shadow3)] ">
+          <div className="bg-[var(--smokey)] rounded-2xl px-16 py-8 drop-shadow-2xl max-md:w-[90%] max-md:m-5 flex justify-center shadow-[var(--shadow3)] ">
             <div className="w-fit flex justify-center gap-8 flex-col">
               <div className="flex justify-center gap-4 flex-col">
                 <Button
