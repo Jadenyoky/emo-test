@@ -268,8 +268,12 @@ import quiz from "@/lib/quiz.json";
 
 export const Radio = ({ quizItemId }) => {
   return (
-    <StyledWrapper className="flex-1 *:flex-1 bg-[var(--white)] rounded-2xl px-4 py-4 shadow-[var(--shadow2)] font-[changa]">
-      {quiz.items[quizItemId].options.map((option, index) => {
+    <StyledWrapper className="relative flex-1 *:flex-1 bg-[var(--white)] rounded-2xl px-4 py-4 shadow-[var(--shadow2)] font-[changa] overflow-hidden">
+      <img
+        src="/pics/quiz-options.png"
+        className="absolute top-0 right-25 bg-cover max-w-[100%] rotate-12 opacity-5 pointer-events-none"
+      />
+      {quiz.items[quizItemId]?.options?.map((option, index) => {
         return (
           <label className="radio-label " key={index}>
             <input type="radio" name="option" className="radio-input" />

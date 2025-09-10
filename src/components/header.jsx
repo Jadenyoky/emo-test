@@ -51,7 +51,7 @@ const Header = ({ handleNavigate }) => {
                 title="logout"
                 onClick={async () => {
                   await handleSignOut();
-                  handleNavigate("/login");
+                  handleNavigate("/");
                 }}
               />
             </div>
