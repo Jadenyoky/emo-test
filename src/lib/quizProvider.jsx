@@ -1,7 +1,14 @@
 "use client";
 import React, { createContext, useContext, useEffect, useState } from "react";
 import { useAuth } from "./authProvider";
-import { doc, onSnapshot, setDoc, updateDoc } from "firebase/firestore";
+import {
+  doc,
+  onSnapshot,
+  serverTimestamp,
+  setDoc,
+  Timestamp,
+  updateDoc,
+} from "firebase/firestore";
 import { db } from "./firebase";
 import { usePathname } from "next/navigation";
 
@@ -13,7 +20,7 @@ export const useQuiz = () => {
 
 const QuizProvider = ({ children }) => {
   const { user, loading } = useAuth();
-  const [quizData, setquizData] = useState(null);
+  const [quizData, setquizData] = useState({});
   const [quizLoading, setquizLoading] = useState(false);
 
   const pathname = usePathname();
@@ -36,9 +43,17 @@ const QuizProvider = ({ children }) => {
         const newQuizData = {
           name: user.displayName,
           email: user.email,
-          currentQuestion: 5,
-          score: 200,
-          questions: 21,
+          createdAt: serverTimestamp(),
+          score: 0,
+          positivePoints: 5,
+          negativePoints: 0,
+          currentQuiz: {
+            currentQuestion: null,
+            answers: {},
+            quizScore: 0,
+            completed: false,
+            startedAt: serverTimestamp(),
+          },
         };
         await setDoc(ref, newQuizData);
         setquizData(newQuizData);
@@ -46,7 +61,7 @@ const QuizProvider = ({ children }) => {
       setquizLoading(true);
     });
 
-    // return () => unsub();
+    return () => unsub();
   }, [pathname, user]);
 
   const updateQuizData = async (data) => {

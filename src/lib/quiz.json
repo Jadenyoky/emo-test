@@ -1,12 +1,7 @@
 {
   "quizTitle": "اختبار التعرف على الانفعالات",
   "description": "شوف الفيديو وحدد الانفعال الصحيح من بين الاختيارات.",
-  "globalSettings": {
-    "timeLimit": 60,
-    "correctPoints": 5,
-    "negativePoints": 0
-  },
-  "question": "ما الانفعال الذي يعبر عنه هذا الوجه ؟",
+  "question": "ما الإنفعال الذي يعبر عنه هذا الوجه ؟",
   "items": [
     {
       "id": 1,

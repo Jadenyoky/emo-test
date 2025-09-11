@@ -25,19 +25,12 @@ const Page = () => {
   const [answers, setanswers] = useState({});
 
   const handleNext = () => {
-    if (!answers[quiz.items[quizItemId].id]) return;
+    if (!quizData?.answers?.[quiz.items[quizItemId].id]) return;
     if (quizItemId === quiz.items.length - 1) {
       console.log("done that's end of quiz");
     } else {
       setquizItemId(quizItemId + 1);
     }
-
-    // if (selectedOption === null) return;
-    // if (quizItemId === quiz.items.length - 1) {
-    //   console.log("done");
-    // } else {
-    //   setquizItemId(quizItemId + 1);
-    // }
   };
 
   const handlePrev = () => {
@@ -47,19 +40,13 @@ const Page = () => {
   };
 
   const handleAnswerSelect = (value) => {
-    setanswers((prve) => {
-      const updated = { ...prve, [quiz.items[quizItemId].id]: value };
-      console.log(updated);
-      return updated;
-    });
+    const currentAnswers = quizData?.answers || {};
 
-    // setanswers((prev) => ({ ...prev, [quiz.items[quizItemId].id]: value }));
+    const updated = { ...currentAnswers, [quiz.items[quizItemId].id]: value };
 
-    // setselectedOption(value);
-    // console.log({
-    //   ...answers,
-    //   [quiz.items[quizItemId].id]: value,
-    // });
+    setanswers(updated);
+    updateQuizData({ answers: updated });
+    console.log(quizData);
   };
 
   return (
@@ -72,7 +59,9 @@ const Page = () => {
         <Question
           allData={quiz}
           quizItemId={quizItemId}
-          selectedAnswer={answers[quiz.items[quizItemId].id]}
+          selectedAnswer={
+            quizData?.answers?.[quiz.items[quizItemId].id] || null
+          }
           onAnswerSelect={handleAnswerSelect}
           onNext={handleNext}
           onPrev={handlePrev}
