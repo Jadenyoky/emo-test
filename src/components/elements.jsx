@@ -1,7 +1,15 @@
 import React from "react";
 import styled from "styled-components";
 
-export const Button = ({ title, onClick, textColor, color1, color2, type }) => {
+export const Button = ({
+  title,
+  onClick,
+  textColor,
+  color1,
+  color2,
+  type,
+  disabled,
+}) => {
   return (
     <StyledWrapperButton
       $colorone={color1}
@@ -12,6 +20,7 @@ export const Button = ({ title, onClick, textColor, color1, color2, type }) => {
         type={type ? type : "button"}
         className="button"
         onClick={onClick}
+        disabled={disabled}
       >
         <span className="fold" />
         <div className="points_wrapper">
@@ -35,6 +44,10 @@ export const Button = ({ title, onClick, textColor, color1, color2, type }) => {
 };
 
 const StyledWrapperButton = styled.div`
+  .button:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+  }
   .button {
     --h-button: 48px;
     --w-button: 102px;
@@ -264,19 +277,24 @@ const StyledWrapperButton = styled.div`
   }
 `;
 
-import quiz from "@/lib/quiz.json";
-
-export const Radio = ({ quizItemId }) => {
+export const Radio = ({ name, options, selected, onChange }) => {
   return (
     <StyledWrapper className="relative flex-1 *:flex-1 bg-[var(--white)] rounded-2xl px-4 py-4 shadow-[var(--shadow2)] font-[changa] overflow-hidden">
       <img
         src="/pics/quiz-options.png"
         className="absolute top-0 right-25 bg-cover max-w-[100%] rotate-12 opacity-5 pointer-events-none"
       />
-      {quiz.items[quizItemId]?.options?.map((option, index) => {
+      {options?.map((option, i) => {
         return (
-          <label className="radio-label " key={index}>
-            <input type="radio" name="option" className="radio-input" />
+          <label key={i} className="radio-label">
+            <input
+              className="radio-input"
+              type="radio"
+              name={name}
+              checked={selected === option}
+              value={option}
+              onChange={() => onChange(option)}
+            />
             <span className="radio-custom" />
             <span className="radio-text">{option}</span>
           </label>
@@ -348,7 +366,8 @@ const StyledWrapper = styled.div`
   }
 
   .radio-text {
-    font-size: 1.1rem;
+    // font-size: 1.1rem;
+    font-size: 16px;
     font-weight: 500;
     color: #c1c3d9;
     transition: color 0.3s ease;
