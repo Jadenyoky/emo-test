@@ -18,7 +18,7 @@ const Question = ({
             rounded-2xl max-md:rounded-[24px_24px_0_0] px-8 py-6 mx-auto flex flex-col justify-between gap-4 "
     >
       <div className="relative justify-between flex flex-col gap-4 ">
-        <div className="h-[12px] rounded-full bg-white flex flex-col justify-center shadow-[var(--shadow)]">
+        <div className="h-[12px] rounded-full bg-white flex flex-col justify-center shadow-[var(--shadow3)]">
           <div
             className={`h-full rounded-full bg-[var(--sky)]
                 transition-all duration-500 ease-in-out
@@ -29,10 +29,10 @@ const Question = ({
           ></div>
         </div>
 
-        <div className="relative rounded-2xl flex items-center justify-center">
+        <div className="relative rounded-2xl flex items-start justify-between">
           <div
-            className="bg-[white] w-fit px-4 rounded-full text-[var(--purple)] flex gap-2 items-center shadow-[var(--shadow)] font-[space_grotesk]
-            absolute top-[0] left-0"
+            className="bg-[white] w-fit px-4 rounded-full text-[var(--purple)] flex gap-2 items-center shadow-[var(--shadow3)] font-[space_grotesk]
+            "
           >
             <p className="text-xl text-[var(--sky)]">
               {allData.items[quizItemId].id}
@@ -48,9 +48,42 @@ const Question = ({
             muted
             autoPlay
             className="aspect-square object-cover rounded-2xl max-w-[50%]
-                 shadow-[var(--shadow2)] max-md:ml-10
+                 shadow-[var(--shadow2)]
                 "
           />
+
+          <div className="flex flex-col gap-2">
+            <Button
+              disabled={!selectedAnswer}
+              color1={"var(--teal)"}
+              color2={"var(--teal)"}
+              textColor={"var(--gold)"}
+              title={"11"}
+              onClick={() => {
+                onNext();
+              }}
+            />
+            <Button
+              disabled={!selectedAnswer}
+              color1={"var(--teal)"}
+              color2={"var(--teal)"}
+              textColor={"var(--gold)"}
+              title={"11"}
+              onClick={() => {
+                onNext();
+              }}
+            />
+            <Button
+              disabled={!selectedAnswer}
+              color1={"var(--teal)"}
+              color2={"var(--teal)"}
+              textColor={"var(--gold)"}
+              title={"11"}
+              onClick={() => {
+                onNext();
+              }}
+            />
+          </div>
         </div>
         <div className="text-[var(--sky)] flex-1 text-right my-3 text-lg max-sm:text-base">
           {allData.question}

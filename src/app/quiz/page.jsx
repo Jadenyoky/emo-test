@@ -25,27 +25,51 @@ const Page = () => {
   const [answers, setanswers] = useState({});
 
   const handleNext = () => {
-    if (!quizData?.answers?.[quiz.items[quizItemId].id]) return;
+    if (!quizData?.currentQuiz?.answers?.[quiz.items[quizItemId].id]) return;
     if (quizItemId === quiz.items.length - 1) {
       console.log("done that's end of quiz");
     } else {
-      setquizItemId(quizItemId + 1);
+      setquizItemId((prev) => {
+        const next = prev + 1;
+        setTimeout(() => {
+          updateQuizData({
+            currentQuiz: {
+              ...quizData.currentQuiz,
+              currentQuestion: quiz.items[next].id,
+            },
+          });
+        }, 500);
+        return next;
+      });
     }
   };
 
   const handlePrev = () => {
     if (quizItemId > 0) {
-      setquizItemId(quizItemId - 1);
+      setquizItemId((prev) => {
+        const next = prev - 1;
+        setTimeout(() => {
+          updateQuizData({
+            currentQuiz: {
+              ...quizData.currentQuiz,
+              currentQuestion: quiz.items[next].id,
+            },
+          });
+        }, 500);
+        return next;
+      });
     }
   };
 
   const handleAnswerSelect = (value) => {
-    const currentAnswers = quizData?.answers || {};
+    const currentAnswers = quizData?.currentQuiz?.answers || {};
 
     const updated = { ...currentAnswers, [quiz.items[quizItemId].id]: value };
 
     setanswers(updated);
-    updateQuizData({ answers: updated });
+    updateQuizData({
+      currentQuiz: { ...quizData.currentQuiz, answers: updated },
+    });
     console.log(quizData);
   };
 
@@ -60,7 +84,7 @@ const Page = () => {
           allData={quiz}
           quizItemId={quizItemId}
           selectedAnswer={
-            quizData?.answers?.[quiz.items[quizItemId].id] || null
+            quizData?.currentQuiz?.answers[quiz.items[quizItemId].id] || null
           }
           onAnswerSelect={handleAnswerSelect}
           onNext={handleNext}

@@ -11,6 +11,7 @@ import {
 } from "firebase/firestore";
 import { db } from "./firebase";
 import { usePathname } from "next/navigation";
+import quiz from "@/lib/quiz.json";
 
 const QuizContext = createContext(null);
 
@@ -41,18 +42,19 @@ const QuizProvider = ({ children }) => {
         setquizData(snap.data());
       } else {
         const newQuizData = {
-          name: user.displayName,
+          name: user.displayNameي,
           email: user.email,
           createdAt: serverTimestamp(),
           score: 0,
           positivePoints: 5,
           negativePoints: 0,
           currentQuiz: {
-            currentQuestion: null,
+            currentQuestion: quiz.items[0].id,
             answers: {},
             quizScore: 0,
             completed: false,
             startedAt: serverTimestamp(),
+            completedAt: null,
           },
         };
         await setDoc(ref, newQuizData);
