@@ -58,7 +58,7 @@ const Header = ({ handleNavigate }) => {
           </div>
         </div>
       )}
-      <div className="flex gap-4">
+      <div className="flex gap-2">
         <button
           className="bg-[white] flex items-center justify-center px-4 rounded-full cursor-pointer 
           "

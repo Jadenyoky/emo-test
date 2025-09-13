@@ -1,14 +1,10 @@
 "use client";
 import Header from "@/components/header";
-import Loader from "@/components/loader";
-import { handleSignOut } from "@/lib/auth";
 import { useRouter } from "next/navigation";
-import React, { use, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useAuth } from "@/lib/authProvider";
 import { useQuiz } from "@/lib/quizProvider";
 import quiz from "@/lib/quiz.json";
-import { Button, Radio } from "@/components/elements";
-import { xor } from "lodash";
 import Question from "@/components/question";
 
 const Page = () => {
@@ -38,7 +34,7 @@ const Page = () => {
               currentQuestion: quiz.items[next].id,
             },
           });
-        }, 500);
+        }, 10);
         return next;
       });
     }
@@ -47,16 +43,16 @@ const Page = () => {
   const handlePrev = () => {
     if (quizItemId > 0) {
       setquizItemId((prev) => {
-        const next = prev - 1;
+        const previous = prev - 1;
         setTimeout(() => {
           updateQuizData({
             currentQuiz: {
               ...quizData.currentQuiz,
-              currentQuestion: quiz.items[next].id,
+              currentQuestion: quiz.items[previous].id,
             },
           });
-        }, 500);
-        return next;
+        }, 10);
+        return previous;
       });
     }
   };
@@ -73,6 +69,10 @@ const Page = () => {
     console.log(quizData);
   };
 
+  const handleQuizItemId = (update) => {
+    setquizItemId(update);
+  };
+
   return (
     <main className="bg-[var(--smokey)]">
       <div className="container px-4 py-4 mx-auto min-h-svh flex flex-col gap-4 justify-between max-md:p-0 ">
@@ -84,13 +84,17 @@ const Page = () => {
           allData={quiz}
           quizItemId={quizItemId}
           selectedAnswer={
-            quizData?.currentQuiz?.answers[quiz.items[quizItemId].id] || null
+            quiz.items?.[quizItemId]?.id
+              ? quizData?.currentQuiz?.answers?.[quiz.items[quizItemId].id] ||
+                null
+              : null
           }
           onAnswerSelect={handleAnswerSelect}
           onNext={handleNext}
           onPrev={handlePrev}
           isFirst={quizItemId === 0}
           isLast={quizItemId === quiz.items.length - 1}
+          updateQuizItemId={handleQuizItemId}
         />
       </div>
     </main>

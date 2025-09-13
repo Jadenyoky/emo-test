@@ -42,14 +42,14 @@ const QuizProvider = ({ children }) => {
         setquizData(snap.data());
       } else {
         const newQuizData = {
-          name: user.displayNameي,
+          name: user.displayName,
           email: user.email,
           createdAt: serverTimestamp(),
           score: 0,
           positivePoints: 5,
           negativePoints: 0,
           currentQuiz: {
-            currentQuestion: quiz.items[0].id,
+            currentQuestion: null,
             answers: {},
             quizScore: 0,
             completed: false,

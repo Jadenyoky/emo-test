@@ -1,5 +1,5 @@
 import "./globals.css";
-import "@flaticon/flaticon-uicons/css/all/all.css";
+// import "@flaticon/flaticon-uicons/css/all/all.css";
 import AuthProvider from "@/lib/authProvider";
 import QuizProvider from "@/lib/quizProvider";
 
@@ -21,6 +21,19 @@ export default function RootLayout({ children }) {
         <link
           href="https://fonts.googleapis.com/css2?family=Changa:wght@200..800&family=Space+Grotesk:wght@300..700&family=Unbounded:wght@200..900&display=swap"
           rel="stylesheet"
+        />
+
+        <link
+          rel="stylesheet"
+          href="https://cdn-uicons.flaticon.com/uicons-solid-rounded/css/uicons-solid-rounded.css"
+        />
+        <link
+          rel="stylesheet"
+          href="https://cdn-uicons.flaticon.com/uicons-solid-straight/css/uicons-solid-straight.css"
+        />
+        <link
+          rel="stylesheet"
+          href="https://cdn-uicons.flaticon.com/uicons-regular-rounded/css/uicons-regular-rounded.css"
         />
       </head>
       <body>
