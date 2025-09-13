@@ -28,7 +28,7 @@ const Header = ({ handleNavigate }) => {
               handleMenu();
             }}
           />
-          <div className="bg-[var(--smokey)] rounded-2xl px-16 py-8 drop-shadow-2xl max-md:w-[90%] max-md:m-5 flex justify-center shadow-[var(--shadow3)] ">
+          <div className="bg-[var(--smokey)] rounded-2xl max-md:rounded-[32px_32px_0_0] px-16 py-8 drop-shadow-2xl max-md:w-[100%] flex justify-center shadow-[var(--shadow3)] ">
             <div className="w-fit flex justify-center gap-8 flex-col">
               <div className="flex justify-center gap-4 flex-col">
                 <Button

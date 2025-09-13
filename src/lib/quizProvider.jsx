@@ -49,7 +49,7 @@ const QuizProvider = ({ children }) => {
           positivePoints: 5,
           negativePoints: 0,
           currentQuiz: {
-            currentQuestion: null,
+            lastQuestion: null,
             answers: {},
             quizScore: 0,
             completed: false,

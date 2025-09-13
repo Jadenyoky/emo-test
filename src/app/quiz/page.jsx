@@ -25,13 +25,16 @@ const Page = () => {
     if (quizItemId === quiz.items.length - 1) {
       console.log("done that's end of quiz");
     } else {
+      const lastId = Object.keys(quizData?.currentQuiz?.answers).at(-1);
+      const lastNum = Number(lastId);
+
       setquizItemId((prev) => {
         const next = prev + 1;
         setTimeout(() => {
           updateQuizData({
             currentQuiz: {
               ...quizData.currentQuiz,
-              currentQuestion: quiz.items[next].id,
+              lastQuestion: lastNum,
             },
           });
         }, 10);
@@ -42,13 +45,16 @@ const Page = () => {
 
   const handlePrev = () => {
     if (quizItemId > 0) {
+      const lastId = Object.keys(quizData?.currentQuiz?.answers).at(-1);
+      const lastNum = Number(lastId);
+
       setquizItemId((prev) => {
         const previous = prev - 1;
         setTimeout(() => {
           updateQuizData({
             currentQuiz: {
               ...quizData.currentQuiz,
-              currentQuestion: quiz.items[previous].id,
+              lastQuestion: lastNum,
             },
           });
         }, 10);

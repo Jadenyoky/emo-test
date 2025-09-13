@@ -22,8 +22,6 @@ const Question = ({
 
   const [alert, setalert] = useState(false);
 
-  const [currentQuestionNow, setcurrentQuestionNow] = useState(null);
-
   const handleVideo = () => {
     if (videoPaused) {
       videoRef.current.play();
@@ -36,14 +34,14 @@ const Question = ({
 
   const handleAlert = () => {
     setalert(!alert);
+    console.log(Object.keys(quizData?.currentQuiz?.answers).at(-1));
   };
 
   const handleReset = () => {
     handleAlert();
     updateQuizData({
-      ...quizData,
       currentQuiz: {
-        currentQuestion: null,
+        lastQuestion: null,
         answers: {},
         quizScore: 0,
         completed: false,
@@ -52,14 +50,15 @@ const Question = ({
       },
     });
     updateQuizItemId(0);
+    setvideoPaused(false);
   };
 
-  const handleCurrentQuestion = () => {
-    updateQuizItemId(quizData?.currentQuiz?.currentQuestion - 1);
+  const handleLastQuestion = () => {
+    updateQuizItemId(quizData?.currentQuiz?.lastQuestion - 1);
 
-    updateQuizData({
-      currentQuiz: { ...quizData.currentQuiz, currentQuestion: null },
-    });
+    // updateQuizData({
+    //   currentQuiz: { ...quizData.currentQuiz, lastQuestion: null },
+    // });
   };
 
   return (
@@ -67,7 +66,7 @@ const Question = ({
       className={` flex-1 max-w-[100%] w-[500px] ${
         quizLoading ? "bg-[white]" : "bg-[var(--gold)]"
       }
-            shadow-[var(--shadow2)] 
+            shadow-[var(--shadow2)]
             rounded-2xl max-md:rounded-[24px_24px_0_0] px-8 py-6 mx-auto flex flex-col justify-between gap-4 `}
     >
       {quizLoading ? (
@@ -86,24 +85,25 @@ const Question = ({
 
             <div className="relative bg-[var(--warm)] p-4 rounded-2xl flex items-start justify-between">
               <div
-                className="bg-[white] w-fit px-4 rounded-full text-[var(--purple)] flex gap-2 items-center shadow-[var(--shadow3)] font-[space_grotesk]
+                className="w-fit bg-[var(--teal)] rounded-full flex flex-col gap-2 p-2 max-sm:p-1 items-center font-[space_grotesk] text-[var(--gold)]
             "
               >
-                <p className="text-xl text-[var(--sky)]">
+                <p className="text-xl max-md:text-lg font-semibold text-[var(--teal)] w-[40px] h-[40px] max-md:h-[30px] max-md:w-[30px] rounded-full flex items-center justify-center bg-[var(--gold)]">
                   {allData.items[quizItemId].id}
                 </p>{" "}
-                <div className="flex gap-1 text-xs">
-                  <span className="">/</span>
-                  <p className="">{allData.items.length}</p>
-                </div>
+                <p className="">of</p>
+                <p className="text-xl max-md:text-base font-semibold text-[var(--teal)] w-[40px] h-[40px] max-md:h-[30px] max-md:w-[30px] rounded-full flex items-center justify-center bg-[var(--warm)]">
+                  {allData.items.length}
+                </p>
               </div>
+
               <video
                 ref={videoRef}
                 src={allData.items[quizItemId].video}
                 loop
                 muted
                 autoPlay
-                className={`aspect-square object-cover rounded-3xl max-w-[50%] shadow-[var(--shadow2)] transition-all 
+                className={`aspect-square object-cover rounded-3xl max-w-[50%] shadow-[var(--shadow2)] transition-all
             ${
               videoPaused
                 ? "scale-90 brightness-80"
@@ -135,20 +135,20 @@ const Question = ({
                     <i className="fi fi-sr-play mt-1.5 text-xl max-sm:text-base"></i>
                   </button>
                 )}
-                {quizData?.currentQuiz?.currentQuestion !== null && (
+                {quizData?.currentQuiz?.lastQuestion < quizItemId && (
                   <button
                     className="cursor-pointer w-[50px] h-[50px] max-sm:w-[40px] max-sm:h-[40px] rounded-full bg-[var(--teal)] flex items-center justify-center text-[var(--gold)]
                 hover:shadow-[var(--shadow3)] transition-all outline-none
                 "
                     onClick={() => {
-                      handleCurrentQuestion();
+                      handleLastQuestion();
                     }}
                   >
                     <i className="fi fi-sr-leaf-maple mt-1.5 text-xl max-sm:text-base"></i>
                   </button>
                 )}
                 {quizData?.currentQuiz?.answers &&
-                  Object.keys(quizData?.currentQuiz?.answers).length > 0 && (
+                  Object.keys(quizData?.currentQuiz?.answers).length > 1 && (
                     <button
                       className="cursor-pointer w-[50px] h-[50px] max-sm:w-[40px] max-sm:h-[40px] rounded-full bg-[var(--red)] flex items-center justify-center text-[var(--smokey)]
                 hover:shadow-[var(--shadow3)] transition-all outline-none
@@ -162,7 +162,7 @@ const Question = ({
                   )}
               </div>
             </div>
-            <div className="text-[var(--sky)] flex-1 text-right my-3 text-lg max-sm:text-base">
+            <div className="text-[var(--sky)] font-semibold flex-1 text-right my-3 text-lg max-sm:text-base">
               {allData.question}
             </div>
           </div>
@@ -228,7 +228,7 @@ const Question = ({
                   handleAlert();
                 }}
               />
-              <div className="bg-[var(--smokey)] rounded-2xl px-16 max-md:px-4 py-8 drop-shadow-2xl max-md:w-[90%] max-md:m-5 flex justify-center shadow-[var(--shadow3)] flex-wrap">
+              <div className="bg-[var(--smokey)] rounded-2xl px-16 max-md:px-4 py-8 drop-shadow-2xl max-md:w-[100%] flex justify-center shadow-[var(--shadow3)] flex-wrap max-md:rounded-[32px_32px_0_0]">
                 <div className="w-fit flex justify-center gap-8 flex-col flex-wrap">
                   <div className="flex flex-col text-right gap-4 bg-[var(--warm)] rounded-2xl p-4">
                     <p className="text-lg max-md:text-base text-[var(--red)] font-semibold">
