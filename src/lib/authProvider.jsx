@@ -28,6 +28,8 @@ const AuthProvider = ({ children }) => {
         router.push("/");
       } else if (pathname === "/quiz" && !user) {
         router.push("/");
+      } else if (pathname === "/result" && !user) {
+        router.push("/");
       }
       setloading(true);
     });

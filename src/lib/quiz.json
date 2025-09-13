@@ -9,127 +9,127 @@
       "id": 1,
       "video": "./videos/01.mp4",
       "options": ["الدهشة", "السعادة", "الفخر", "الارتياح"],
-      "correctAnswer": ""
+      "correctAnswer": "الدهشة"
     },
     {
       "id": 2,
       "video": "videos/02.mp4",
       "options": ["الاشمئزاز", "الغضب", "الإحباط", "القلق"],
-      "correctAnswer": ""
+      "correctAnswer": "الاشمئزاز"
     },
     {
       "id": 3,
       "video": "videos/03.mp4",
       "options": ["الخوف", "الندم", "الإحباط", "الحزن"],
-      "correctAnswer": ""
+      "correctAnswer": "الخوف"
     },
     {
       "id": 4,
       "video": "videos/04.mp4",
       "options": ["الريبه", "الحذر", "الشك", "القلق"],
-      "correctAnswer": ""
+      "correctAnswer": "الريبه"
     },
     {
       "id": 5,
       "video": "videos/05.mp4",
       "options": ["الخجل", "الاحراج", "الارتباك", "الذنب"],
-      "correctAnswer": ""
+      "correctAnswer": "الخجل"
     },
     {
       "id": 6,
       "video": "videos/06.mp4",
       "options": ["العار", "الخجل", "الذنب", "الإحراج"],
-      "correctAnswer": ""
+      "correctAnswer": "العار"
     },
     {
       "id": 7,
       "video": "videos/07.mp4",
       "options": ["البرود", "الاستهتار", "التعب", "اللامبالاة"],
-      "correctAnswer": ""
+      "correctAnswer": "البرود"
     },
     {
       "id": 8,
       "video": "videos/08.mp4",
       "options": ["الدهشة", "القلق", "الحذر", "الخوف"],
-      "correctAnswer": ""
+      "correctAnswer": "الدهشة"
     },
     {
       "id": 9,
       "video": "videos/09.mp4",
       "options": ["الحياء", "الاحراج", "الخجل", "الندم"],
-      "correctAnswer": ""
+      "correctAnswer": "الحياء"
     },
     {
       "id": 10,
       "video": "videos/10.mp4",
       "options": ["الاندهاش", "الحماس", "الخوف", "الفضول"],
-      "correctAnswer": ""
+      "correctAnswer": "الاندهاش"
     },
     {
       "id": 11,
       "video": "videos/11.mp4",
       "options": ["السخرية", "التعالي", "الاحتقار", "العار"],
-      "correctAnswer": ""
+      "correctAnswer": "السخرية"
     },
     {
       "id": 12,
       "video": "videos/12.mp4",
       "options": ["السخرية", "المجاملة", "التصنع", "الاهتمام"],
-      "correctAnswer": ""
+      "correctAnswer": "السخرية"
     },
     {
       "id": 13,
       "video": "videos/13.mp4",
       "options": ["الحيرة", "الدهشة", "الارتباك", "الخوف"],
-      "correctAnswer": ""
+      "correctAnswer": "الحيرة"
     },
     {
       "id": 14,
       "video": "videos/14.mp4",
       "options": ["الخوف", "الندم", "الحزن", "الاحباط"],
-      "correctAnswer": ""
+      "correctAnswer": "الخوف"
     },
     {
       "id": 15,
       "video": "videos/15.mp4",
       "options": ["الحزن", "الندم", "الذنب", "الخجل"],
-      "correctAnswer": ""
+      "correctAnswer": "الحزن"
     },
     {
       "id": 16,
       "video": "videos/16.mp4",
       "options": ["الاهتمام", "الفضول", "الدهشة", "الحذر"],
-      "correctAnswer": ""
+      "correctAnswer": "الاهتمام"
     },
     {
       "id": 17,
       "video": "videos/17.mp4",
       "options": ["السخرية", "المزاح", "المجاملة", "الفرح"],
-      "correctAnswer": ""
+      "correctAnswer": "السخرية"
     },
     {
       "id": 18,
       "video": "videos/18.mp4",
       "options": ["التركيز", "الفضول", "الاهتمام", "الفرح"],
-      "correctAnswer": ""
+      "correctAnswer": "التركيز"
     },
     {
       "id": 19,
       "video": "videos/19.mp4",
       "options": ["السعادة", "الامتنان", "البهجة", "الرضا"],
-      "correctAnswer": ""
+      "correctAnswer": "السعادة"
     },
     {
       "id": 20,
       "video": "videos/20.mp4",
       "options": ["الملل", "اللامبالاة", "الاحباط", "الارهاق"],
-      "correctAnswer": ""
+      "correctAnswer": "الملل"
     },
     {
       "id": 21,
       "video": "videos/21.mp4",
       "options": ["الاستياء", "الغضب", "الاشمئزاز", "القرف"],
-      "correctAnswer": ""
+      "correctAnswer": "الاستياء"
     }
   ]
 }

@@ -14,6 +14,7 @@ const Question = ({
   isFirst,
   isLast,
   updateQuizItemId,
+  onResult,
 }) => {
   const { quizData, updateQuizData, quizLoading } = useQuiz();
 
@@ -34,11 +35,10 @@ const Question = ({
 
   const handleAlert = () => {
     setalert(!alert);
-    console.log(Object.keys(quizData?.currentQuiz?.answers).at(-1));
   };
 
   const handleReset = () => {
-    handleAlert();
+    setalert(false);
     updateQuizData({
       currentQuiz: {
         lastQuestion: null,
@@ -55,10 +55,17 @@ const Question = ({
 
   const handleLastQuestion = () => {
     updateQuizItemId(quizData?.currentQuiz?.lastQuestion - 1);
+  };
 
-    // updateQuizData({
-    //   currentQuiz: { ...quizData.currentQuiz, lastQuestion: null },
-    // });
+  const showLastQuestion = () => {
+    if (
+      quizData?.currentQuiz?.lastQuestion &&
+      quizData?.currentQuiz?.lastQuestion - 1 !== quizItemId &&
+      quizData?.currentQuiz?.lastQuestion - 1 > quizItemId
+    )
+      return true;
+
+    return false;
   };
 
   return (
@@ -79,6 +86,8 @@ const Question = ({
                 `}
                 style={{
                   width: `${((quizItemId + 1) / allData.items.length) * 100}%`,
+                  background:
+                    "linear-gradient(90deg, var(--teal), var(--gold))",
                 }}
               ></div>
             </div>
@@ -135,7 +144,7 @@ const Question = ({
                     <i className="fi fi-sr-play mt-1.5 text-xl max-sm:text-base"></i>
                   </button>
                 )}
-                {quizData?.currentQuiz?.lastQuestion < quizItemId && (
+                {showLastQuestion() && (
                   <button
                     className="cursor-pointer w-[50px] h-[50px] max-sm:w-[40px] max-sm:h-[40px] rounded-full bg-[var(--teal)] flex items-center justify-center text-[var(--gold)]
                 hover:shadow-[var(--shadow3)] transition-all outline-none
@@ -193,13 +202,12 @@ const Question = ({
               <div className="">
                 <Button
                   disabled={!selectedAnswer}
-                  color1={"var(--purple)"}
-                  color2={"var(--purple)"}
+                  color1={"var(--gold)"}
+                  color2={"var(--teal)"}
                   textColor={"var(--gold)"}
                   title={"النتيجة"}
                   onClick={() => {
-                    onNext();
-                    setvideoPaused(false);
+                    onResult();
                   }}
                 />
               </div>

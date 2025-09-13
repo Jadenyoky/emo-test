@@ -83,7 +83,9 @@ const QuizProvider = ({ children }) => {
   // }
 
   return (
-    <QuizContext.Provider value={{ quizData, updateQuizData, quizLoading }}>
+    <QuizContext.Provider
+      value={{ quizData, updateQuizData, quizLoading, setquizLoading }}
+    >
       {children}
     </QuizContext.Provider>
   );
