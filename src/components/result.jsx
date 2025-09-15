@@ -2,7 +2,6 @@
 import React from "react";
 import { Button, CircularProgress } from "./elements";
 import { useRouter } from "next/navigation";
-import CountUp from "./CountUp";
 import { useQuiz } from "@/lib/quizProvider";
 
 const Result = () => {
