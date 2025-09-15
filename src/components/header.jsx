@@ -1,12 +1,12 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import { handleSignOut } from "@/lib/auth";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { Button } from "./elements";
 import { useAuth } from "@/lib/authProvider";
 import { useQuiz } from "@/lib/quizProvider";
 
-const Header = ({ handleNavigate }) => {
+const Header = () => {
   const { user, loading } = useAuth();
   const { quizData } = useQuiz();
 
@@ -16,6 +16,12 @@ const Header = ({ handleNavigate }) => {
     setmenu(!menu);
   };
 
+  const router = useRouter();
+
+  const handleNavigate = (location) => {
+    router.push(location);
+  };
+  
   if (!user) return null;
 
   return (

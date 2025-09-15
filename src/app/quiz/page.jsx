@@ -6,7 +6,6 @@ import { useAuth } from "@/lib/authProvider";
 import { useQuiz } from "@/lib/quizProvider";
 import quiz from "@/lib/quiz.json";
 import Question from "@/components/question";
-import _, { result } from "lodash";
 import { serverTimestamp } from "firebase/firestore";
 import Loader from "@/components/loader";
 
@@ -75,12 +74,21 @@ const Page = () => {
 
     let score = 0;
     let results = [];
+    let correctNum = 0;
+    let wrongNum = 0;
 
     Object.entries(answers).forEach(([key, value]) => {
       const current = quiz.items[key - 1];
       const isCorrect = current.correctAnswer === value;
+      const isWrong = current.correctAnswer !== value;
 
       score += isCorrect ? quizData.positivePoints : quizData.negativePoints;
+
+      if (isCorrect) {
+        correctNum += 1;
+      } else if (isWrong) {
+        wrongNum += 1;
+      }
 
       results.push({
         ...current,
@@ -95,6 +103,9 @@ const Page = () => {
       completedAt: serverTimestamp(),
       quizScore: score,
       resultAnswers: results,
+      correctQuestions: correctNum,
+      wrongQuestions: wrongNum,
+      percentage: ((correctNum / (correctNum + wrongNum)) * 100).toFixed(0),
     };
 
     const quizId = Object.keys(quizData.history || {}).length + 1;
@@ -125,7 +136,7 @@ const Page = () => {
     <main className="bg-[var(--smokey)]">
       <div className="container px-4 py-4 mx-auto min-h-svh flex flex-col gap-4 justify-between max-md:p-0 ">
         <div className="max-md:pt-4 max-md:px-4">
-          <Header handleNavigate={handleNavigate} />
+          <Header />
         </div>
         {resultLoading ? (
           <Question
@@ -147,7 +158,12 @@ const Page = () => {
           />
         ) : (
           <div className="flex justify-center items-center flex-1">
-            <Loader />
+            <div className=" z-[200] fixed h-svh w-full top-0 left-0 flex flex-col justify-center max-md:justify-end items-center backdrop-blur-sm ">
+              <div className="fixed z-[-1] h-svh w-full top-0 left-0  bg-[var(--teal)] opacity-50" />
+              <div className="flex justify-center items-center m-auto bg-[var(--smokey)] p-4 rounded-3xl shadow-[var(--shadow2)]">
+                <Loader />
+              </div>
+            </div>
           </div>
         )}
       </div>
