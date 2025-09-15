@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import { Button, CircularProgress } from "./elements";
+import { Button } from "./elements";
 import { useRouter } from "next/navigation";
 import { useQuiz } from "@/lib/quizProvider";
 

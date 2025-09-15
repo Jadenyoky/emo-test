@@ -1,5 +1,5 @@
 import React, { useRef, useState } from "react";
-import Radio, { Button } from "./elements";
+import { Button, Radio } from "./elements";
 import { useQuiz } from "@/lib/quizProvider";
 import Loader from "./loader";
 import { serverTimestamp } from "firebase/firestore";
