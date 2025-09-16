@@ -19,19 +19,19 @@ const Result = () => {
 
   return (
     <div
-      className="flex-1 max-w-[100%] max-md:w-[100%] w-[500px] bg-[white]
+      className="relative flex-1 max-w-[100%] max-md:w-[100%] w-[500px] bg-[white]
             shadow-[var(--shadow2)]
             rounded-2xl max-md:rounded-[24px_24px_0_0] px-8 py-6 mx-auto flex flex-col justify-between gap-8"
     >
       <div
-        className="flex-[1] -mx-8 -mt-6 min-h-[200px]"
+        className="absolute top-0 right-0 left-0 bottom-0 mask-b-from-0.5 opacity-50 rounded-2xl"
         style={{
-          background: "url(/pics/result.jpg) no-repeat center center/contain",
+          background: "url(/pics/result.jpg) no-repeat center center/cover",
         }}
       ></div>
-      <div className="relative flex-1 flex flex-col justify-around gap-4 text-[var(--purple)] bg-[var(--warm)] rounded-3xl py-8 px-8 ">
+      <div className="relative flex-1 flex flex-col justify-around gap-4 text-[var(--purple)] bg-[var(--)] rounded-3xl py-8 px-8 ">
         <div
-          className="absolute top-[-40px] right-[0px] shadow-[var(--shadow2)] flex items-center backdrop-blur-xl rounded-2xl px-8 py-4 gap-6 "
+          className="shadow-[var(--shadow2)] flex items-center backdrop-blur-xl rounded-2xl px-8 py-4 gap-6 "
           style={{
             direction: "rtl",
           }}
@@ -49,7 +49,7 @@ const Result = () => {
         max-sm:justify-between font-semibold font-[space_grotesk]"
         >
           <div className="w-[90px] h-[90px] bg-[var(--smokey)] text-[var(--purple)] rounded-full flex items-center justify-center text-xl">
-            {quizData.lastQuiz.percentage}45 %
+            {quizData.lastQuiz.percentage} %
           </div>
           <div>
             <div className="flex items-center gap-4  text-[var(--teal)]">
