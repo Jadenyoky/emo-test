@@ -157,7 +157,8 @@ const Question = ({
                   </button>
                 )}
                 {quizData?.currentQuiz?.answers &&
-                  Object.keys(quizData?.currentQuiz?.answers).length > 1 && (
+                  Object.keys(quizData?.currentQuiz?.answers || {}).length >
+                    1 && (
                     <button
                       className="cursor-pointer w-[50px] h-[50px] max-sm:w-[40px] max-sm:h-[40px] rounded-full bg-[var(--red)] flex items-center justify-center text-[var(--smokey)]
                 hover:shadow-[var(--shadow3)] transition-all outline-none
