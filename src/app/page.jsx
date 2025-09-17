@@ -75,7 +75,7 @@ const Page = () => {
                       Quizes ,
                     </p>
                     <p className="font-semibold text-2xl font-[Space_Grotesk] text-[var(--purple)] text-right">
-                      {Object.keys(quizData?.history).length || 0}
+                      {Object.keys(quizData?.history || {}).length || 0}
                     </p>
                   </div>
                 ) : (
