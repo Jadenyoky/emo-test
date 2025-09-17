@@ -19,64 +19,75 @@ const Result = () => {
 
   return (
     <div
-      className="relative flex-1 max-w-[100%] max-md:w-[100%] w-[500px] bg-[white]
+      className="relative flex-1 max-w-[100%] max-md:w-[100%] w-[500px] 
             shadow-[var(--shadow2)]
             rounded-2xl max-md:rounded-[24px_24px_0_0] px-8 py-6 mx-auto flex flex-col justify-between gap-8"
     >
       <div
-        className="absolute top-0 right-0 left-0 bottom-0 mask-b-from-0.5 opacity-50 rounded-2xl"
+        className="absolute top-0 right-0 left-0 bottom-0 mask-b-from-0.5 opacity-10 rounded-2xl"
         style={{
           background: "url(/pics/result.jpg) no-repeat center center/cover",
         }}
       ></div>
-      <div className="relative flex-1 flex flex-col justify-around gap-4 text-[var(--purple)] bg-[var(--)] rounded-3xl py-8 px-8 ">
+      <div className="relative flex-1 flex flex-col justify-between gap-4 rounded-3xl py-8 px-8">
         <div
-          className="shadow-[var(--shadow2)] flex items-center backdrop-blur-xl rounded-2xl px-8 py-4 gap-6 "
+          className="rounded-xl flex items-center w-fit mx-auto justify-center gap-8 font-semibold bg-[var(--teal)] shadow-[var(--shadow3)] pr-4"
           style={{
             direction: "rtl",
           }}
         >
-          <i className="fi fi-sr-memo-circle-check text-3xl mt-1.5"></i>
-          <div className=" flex gap-2 flex-col">
-            <h1 className="text-base font-semibold">نتائج آخر اختبار</h1>
-            <p className="opacity-50 text-xs">ملخص وارقام الاختبار</p>
+          <h1 className="text-xl text-[var(--gold)]">نتيجة الاختبار</h1>
+          <div className="text-[var(--teal)] w-[50px] h-[50px] flex items-center justify-center rounded-xl bg-[white] text-xl -m-1">
+            <i className="fi fi-sr-memo-circle-check text-2xl mt-1.5"></i>
           </div>
         </div>
-
-        <div
-          className="mt-10  rounded-full flex items-center 
-        justify-around
-        max-sm:justify-between font-semibold font-[space_grotesk]"
-        >
-          <div className="w-[90px] h-[90px] bg-[var(--smokey)] text-[var(--purple)] rounded-full flex items-center justify-center text-xl">
-            {quizData.lastQuiz.percentage} %
-          </div>
-          <div>
-            <div className="flex items-center gap-4  text-[var(--teal)]">
-              <i className="fi fi-sr-check-circle text-xl mt-1.5"></i>
-              <p className="text-[var(--red] flex items-center justify-center rounded-full bg-[white] px-4">
-                {quizData.lastQuiz.correctQuestions}
-              </p>
+        <div className="flex-1 flex flex-col gap-4 justify-around">
+          <div className="font-[space_grotesk] border flex items-center justify-around border-[var(--smokey)] rounded-2xl px-4 py-8 bg-[#ffd9009a] gap-8 flex-wrap">
+            <div className="relative bg-[white] text-[var(--sky)] font-semibold flex items-center justify-center text-2xl w-[70px] h-[70px] rounded-full order-1">
+              {quizData.lastQuiz.correctQuestions}
+              <span className="absolute top-[-10px] right-0 text-[white] bg-[var(--sky)] w-[30px] h-[30px] font-semibold rounded-full flex items-center justify-center text-base font-[space_grotesk]">
+                <i className="fi fi-sr-check mt-1.5"></i>
+              </span>
             </div>
-            <div className="flex items-center gap-4  text-[var(--red)]">
-              <i className="fi fi-sr-circle-xmark text-xl mt-1.5"></i>
-              <p className="text-[var(--red] flex items-center justify-center rounded-full bg-[white] px-4">
-                {quizData.lastQuiz.wrongQuestions}
-              </p>
-            </div>
-          </div>
-        </div>
 
-        <div
-          className="rounded-full flex items-center w-fit mx-auto justify-center gap-4 font-semibold bg-[white] shadow-[var(--shadow3)] pr-4"
-          style={{
-            direction: "rtl",
-          }}
-        >
-          <h1 className="font-[changa]">النقاط</h1>
-          <h1 className="text-[var(--gold)] w-[50px] h-[50px] flex items-center justify-center rounded-full bg-[var(--purple)] text-xl -m-1">
-            {quizData.lastQuiz.quizScore}
-          </h1>
+            <div className="relative bg-[white] text-[var(--purple)] font-semibold flex items-center justify-center text-2xl w-[70px] h-[70px] rounded-full order-2 max-sm:order-3">
+              {quizData.lastQuiz.percentage}
+              <span className="absolute top-[-10px] right-0 text-[white] bg-[var(--purple)] w-[30px] h-[30px] font-semibold rounded-full flex items-center justify-center text-base font-[space_grotesk]">
+                %
+              </span>
+            </div>
+
+            <div className="relative bg-[white] text-[var(--red)] font-semibold flex items-center justify-center text-2xl w-[70px] h-[70px] rounded-full order-3 max-sm:order-2">
+              {quizData.lastQuiz.wrongQuestions}
+              <span className="absolute top-[-10px] right-0 text-[white] bg-[var(--red)] w-[30px] h-[30px] font-semibold rounded-full flex items-center justify-center text-base font-[space_grotesk]">
+                <i className="fi fi-sr-x text-sm mt-1"></i>
+              </span>
+            </div>
+            {/* <div className="flex flex-col gap-4">
+              <div className=" text-[var(--sky)] font-semibold flex items-center gap-10 justify-between rounded-full bg-[white] px-4">
+                <i className="fi fi-sr-check-circle text-3xl -mx-5 -mb-2"></i>
+
+                <p className="">{quizData.lastQuiz.correctQuestions}</p>
+              </div>
+              <div className=" text-[var(--red)] font-semibold flex items-center gap-10 justify-between rounded-full bg-[white] px-4 ">
+                <i className="fi fi-sr-circle-xmark text-3xl -mx-5 -mb-2"></i>
+
+                <p className="">{quizData.lastQuiz.wrongQuestions}</p>
+              </div>
+            </div> */}
+          </div>
+
+          <div
+            className="rounded-full flex items-center w-fit mx-auto justify-center gap-4 font-semibold bg-[white] shadow-[var(--shadow3)] pr-4"
+            style={{
+              direction: "rtl",
+            }}
+          >
+            <h1 className="font-[changa]">النقاط</h1>
+            <h1 className="text-[var(--gold)] w-[50px] h-[50px] flex items-center justify-center rounded-full bg-[var(--purple)] text-xl -m-1">
+              {quizData.lastQuiz.quizScore}
+            </h1>
+          </div>
         </div>
       </div>
 
