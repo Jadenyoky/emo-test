@@ -41,7 +41,7 @@ const Page = () => {
         {loading ? (
           user ? (
             <div className="max-md:h-full flex flex-col justify-center gap-8 items-center">
-              <div className="flex justify-between flex-wrap w-full gap-10 px-2 ">
+              <div className="flex justify-between flex-wrap w-full gap-4 px-2 ">
                 {quizLoading ? (
                   <div className="relative flex flex-col gap-1 ">
                     <div className="rounded-2xl h-[50%] w-[50px] absolute bottom-0 right-0 bg-[var(--gold)] z-[-1] rotate-2 opacity-50" />
@@ -140,7 +140,7 @@ const Page = () => {
       </div>
 
       <img
-        className="max-md:w-[300px] object-cover "
+        className="max-md:max-w-[300px] max-[375px]:w-[200px] object-cover "
         src="/pics/hero.jpg"
         alt=""
       />
