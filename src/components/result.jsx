@@ -29,7 +29,7 @@ const Result = () => {
           background: "url(/pics/result.jpg) no-repeat center center/cover",
         }}
       ></div>
-      <div className="relative flex-1 flex flex-col justify-between gap-4 rounded-3xl py-8 px-8">
+      <div className="relative flex-1 flex flex-col justify-between gap-4 rounded-3xl ">
         <div
           className="rounded-xl flex items-center w-fit mx-auto justify-center gap-8 font-semibold bg-[var(--teal)] shadow-[var(--shadow3)] pr-4"
           style={{
@@ -50,31 +50,19 @@ const Result = () => {
               </span>
             </div>
 
-            <div className="relative bg-[white] text-[var(--purple)] font-semibold flex items-center justify-center text-2xl w-[70px] h-[70px] rounded-full order-2 max-sm:order-3">
+            <div className="relative bg-[white] text-[var(--purple)] font-semibold flex items-center justify-center text-2xl w-[70px] h-[70px] rounded-full order-2 max-[375px]:order-3">
               {quizData.lastQuiz.percentage}
               <span className="absolute top-[-10px] right-0 text-[white] bg-[var(--purple)] w-[30px] h-[30px] font-semibold rounded-full flex items-center justify-center text-base font-[space_grotesk]">
                 %
               </span>
             </div>
 
-            <div className="relative bg-[white] text-[var(--red)] font-semibold flex items-center justify-center text-2xl w-[70px] h-[70px] rounded-full order-3 max-sm:order-2">
+            <div className="relative bg-[white] text-[var(--red)] font-semibold flex items-center justify-center text-2xl w-[70px] h-[70px] rounded-full order-3 max-[375px]:order-2">
               {quizData.lastQuiz.wrongQuestions}
               <span className="absolute top-[-10px] right-0 text-[white] bg-[var(--red)] w-[30px] h-[30px] font-semibold rounded-full flex items-center justify-center text-base font-[space_grotesk]">
                 <i className="fi fi-sr-x text-sm mt-1"></i>
               </span>
             </div>
-            {/* <div className="flex flex-col gap-4">
-              <div className=" text-[var(--sky)] font-semibold flex items-center gap-10 justify-between rounded-full bg-[white] px-4">
-                <i className="fi fi-sr-check-circle text-3xl -mx-5 -mb-2"></i>
-
-                <p className="">{quizData.lastQuiz.correctQuestions}</p>
-              </div>
-              <div className=" text-[var(--red)] font-semibold flex items-center gap-10 justify-between rounded-full bg-[white] px-4 ">
-                <i className="fi fi-sr-circle-xmark text-3xl -mx-5 -mb-2"></i>
-
-                <p className="">{quizData.lastQuiz.wrongQuestions}</p>
-              </div>
-            </div> */}
           </div>
 
           <div
