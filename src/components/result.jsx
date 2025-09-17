@@ -75,11 +75,11 @@ const Result = () => {
                 direction: "rtl",
               }}
             >
-              <span className="absolute top-[-2px] right-[10px] text-[var(--sky)] bg-[white] w-[30px] h-[30px] font-semibold rounded-full flex items-center justify-center text-base font-[space_grotesk] shadow-[var(--shadow2)] z-[2]">
+              <span className="absolute top-[-2px] right-[10px] text-[var(--sky)] bg-[white] w-[30px] h-[30px] font-semibold rounded-full flex items-center justify-center text-base font-[space_grotesk] z-[2]">
                 <i className="fi fi-sr-plus text-sm mt-1"></i>
               </span>
 
-              <h1 className="text-[white] w-[70px] h-[70px] flex items-center justify-center rounded-full bg-[var(--sky)] font-[space_grotesk] shadow-[var(--shadow2)] text-2xl -m-1">
+              <h1 className="text-[white] w-[70px] h-[70px] flex items-center justify-center rounded-full bg-[var(--sky)] font-[space_grotesk] text-2xl -m-1">
                 {quizData.lastQuiz.quizScore}
               </h1>
             </div>
