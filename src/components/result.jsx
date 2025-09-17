@@ -65,16 +65,24 @@ const Result = () => {
             </div>
           </div>
 
-          <div
-            className="rounded-full flex items-center w-fit mx-auto justify-center gap-4 font-semibold bg-[white] shadow-[var(--shadow3)] pr-4"
-            style={{
-              direction: "rtl",
-            }}
-          >
-            <h1 className="font-[changa]">النقاط</h1>
-            <h1 className="text-[var(--gold)] w-[50px] h-[50px] flex items-center justify-center rounded-full bg-[var(--purple)] text-xl -m-1">
-              {quizData.lastQuiz.quizScore}
+          <div className="flex flex-col gap-4 items-center">
+            <h1 className=" text-[var(--gold)] bg-[var(--teal)] font-semibold rounded-full flex items-center px-4 py-2 justify-center text-base">
+              النقاط
             </h1>
+            <div
+              className="relative rounded-full flex items-center w-fit mx-auto justify-center gap-4 font-semibold bg-[white] shadow-[var(--shadow3)] p-4"
+              style={{
+                direction: "rtl",
+              }}
+            >
+              <span className="absolute top-[-2px] right-[10px] text-[var(--sky)] bg-[white] w-[30px] h-[30px] font-semibold rounded-full flex items-center justify-center text-base font-[space_grotesk] shadow-[var(--shadow2)]">
+                <i className="fi fi-sr-plus text-sm mt-1"></i>
+              </span>
+
+              <h1 className="text-[white] w-[70px] h-[70px] flex items-center justify-center rounded-full bg-[var(--sky)] font-[space_grotesk] shadow-[var(--shadow2)] text-2xl -m-1">
+                {quizData.lastQuiz.quizScore}
+              </h1>
+            </div>
           </div>
         </div>
       </div>
