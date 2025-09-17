@@ -4,6 +4,7 @@ import { auth } from "./firebase";
 import { usePathname, useRouter } from "next/navigation";
 import { onAuthStateChanged } from "firebase/auth";
 import Loader from "@/components/loader";
+import { useQuiz } from "./quizProvider";
 
 const AuthContext = createContext(null);
 

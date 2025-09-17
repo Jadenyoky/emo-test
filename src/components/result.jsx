@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useEffect } from "react";
 import { Button } from "./elements";
 import { useRouter } from "next/navigation";
 import { useQuiz } from "@/lib/quizProvider";
@@ -14,6 +14,12 @@ const Result = () => {
   };
 
   console.log(quizData);
+
+  useEffect(() => {
+    if (!quizData?.lastQuiz && quizLoading) {
+      router.push("/");
+    }
+  }, [quizData, quizLoading, router]);
 
   if (!quizLoading) return null;
 
@@ -44,21 +50,21 @@ const Result = () => {
         <div className="flex-1 flex flex-col gap-4 justify-around">
           <div className="font-[space_grotesk] border flex items-center justify-around border-[var(--smokey)] rounded-2xl px-4 py-8 bg-[#ffd9009a] gap-8 flex-wrap">
             <div className="relative bg-[white] text-[var(--sky)] font-semibold flex items-center justify-center text-2xl w-[70px] h-[70px] rounded-full order-1">
-              {quizData.lastQuiz.correctQuestions}
+              {quizData?.lastQuiz?.correctQuestions}
               <span className="absolute top-[-10px] right-0 text-[white] bg-[var(--sky)] w-[30px] h-[30px] font-semibold rounded-full flex items-center justify-center text-base font-[space_grotesk]">
                 <i className="fi fi-sr-check mt-1.5"></i>
               </span>
             </div>
 
             <div className="relative bg-[white] text-[var(--purple)] font-semibold flex items-center justify-center text-2xl w-[70px] h-[70px] rounded-full order-2 max-[375px]:order-3">
-              {quizData.lastQuiz.percentage}
+              {quizData?.lastQuiz?.percentage}
               <span className="absolute top-[-10px] right-0 text-[white] bg-[var(--purple)] w-[30px] h-[30px] font-semibold rounded-full flex items-center justify-center text-base font-[space_grotesk]">
                 %
               </span>
             </div>
 
             <div className="relative bg-[white] text-[var(--red)] font-semibold flex items-center justify-center text-2xl w-[70px] h-[70px] rounded-full order-3 max-[375px]:order-2">
-              {quizData.lastQuiz.wrongQuestions}
+              {quizData?.lastQuiz?.wrongQuestions}
               <span className="absolute top-[-10px] right-0 text-[white] bg-[var(--red)] w-[30px] h-[30px] font-semibold rounded-full flex items-center justify-center text-base font-[space_grotesk]">
                 <i className="fi fi-sr-x text-sm mt-1"></i>
               </span>
@@ -80,7 +86,7 @@ const Result = () => {
               </span>
 
               <h1 className="text-[white] w-[70px] h-[70px] flex items-center justify-center rounded-full bg-[var(--sky)] font-[space_grotesk] text-2xl -m-1">
-                {quizData.lastQuiz.quizScore}
+                {quizData?.lastQuiz?.quizScore}
               </h1>
             </div>
           </div>
