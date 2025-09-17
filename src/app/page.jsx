@@ -140,7 +140,7 @@ const Page = () => {
       </div>
 
       <img
-        className="max-md:max-w-[300px] max-[375px]:w-[200px] object-cover "
+        className="max-md:max-w-[300px] max-[350px]:w-[230px] object-cover "
         src="/pics/hero.jpg"
         alt=""
       />
