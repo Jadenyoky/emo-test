@@ -65,17 +65,17 @@ const Result = () => {
             </div>
           </div>
 
-          <div className="flex flex-col gap-4 items-center">
-            <h1 className=" text-[var(--gold)] bg-[var(--teal)] font-semibold rounded-full flex items-center px-4 py-2 justify-center text-base">
+          <div className="flex flex-col items-center">
+            <h1 className=" text-[var(--sky)] bg-[white] font-semibold rounded-full flex items-center px-4 py-2  justify-center text-base z-[1] mb-[-10px]">
               النقاط
             </h1>
             <div
-              className="relative rounded-full flex items-center w-fit mx-auto justify-center gap-4 font-semibold bg-[white] shadow-[var(--shadow3)] p-4"
+              className="relative rounded-full flex items-center w-fit mx-auto justify-center gap-4 font-semibold bg-[white] shadow-[var(--shadow2)] p-4"
               style={{
                 direction: "rtl",
               }}
             >
-              <span className="absolute top-[-2px] right-[10px] text-[var(--sky)] bg-[white] w-[30px] h-[30px] font-semibold rounded-full flex items-center justify-center text-base font-[space_grotesk] shadow-[var(--shadow2)]">
+              <span className="absolute top-[-2px] right-[10px] text-[var(--sky)] bg-[white] w-[30px] h-[30px] font-semibold rounded-full flex items-center justify-center text-base font-[space_grotesk] shadow-[var(--shadow2)] z-[2]">
                 <i className="fi fi-sr-plus text-sm mt-1"></i>
               </span>
 

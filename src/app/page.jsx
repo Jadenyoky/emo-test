@@ -48,7 +48,7 @@ const Page = () => {
                     <p className="text-sm text-[var(--teal)] font-[Unbounded]">
                       Hello ,
                     </p>
-                    <p className="font-semibold text-2xl text-[var(--teal)]">
+                    <p className="font-semibold text-2xl text-[var(--teal)] text-center">
                       {user?.displayName}
                     </p>
                   </div>
@@ -61,7 +61,7 @@ const Page = () => {
                     <p className="text-sm text-[var(--red)] font-[Unbounded]">
                       Score ,
                     </p>
-                    <p className="font-semibold text-2xl font-[Space_Grotesk] text-[var(--red)]">
+                    <p className="font-semibold text-2xl font-[Space_Grotesk] text-[var(--red)] text-center">
                       {quizData?.score}
                     </p>
                   </div>
@@ -74,7 +74,7 @@ const Page = () => {
                     <p className="text-sm text-[var(--purple)] font-[Unbounded]">
                       Quizes ,
                     </p>
-                    <p className="font-semibold text-2xl font-[Space_Grotesk] text-[var(--purple)] text-right">
+                    <p className="font-semibold text-2xl font-[Space_Grotesk] text-[var(--purple)] text-center">
                       {Object.keys(quizData?.history || {}).length || 0}
                     </p>
                   </div>
