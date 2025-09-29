@@ -1,8 +1,10 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Button, Radio } from "./elements";
 import { useQuiz } from "@/lib/quizProvider";
 import Loader from "./loader";
 import { serverTimestamp } from "firebase/firestore";
+import Aos from "aos";
+import "aos/dist/aos.css";
 
 const Question = ({
   allData,
@@ -55,6 +57,7 @@ const Question = ({
 
   const handleLastQuestion = () => {
     updateQuizItemId(quizData?.currentQuiz?.lastQuestion - 1);
+    setvideoPaused(false);
   };
 
   const showLastQuestion = () => {
@@ -68,11 +71,14 @@ const Question = ({
     return false;
   };
 
+  useEffect(() => {
+    Aos.init();
+  }, []);
+
   return (
     <div
-      className={` flex-1 max-w-[100%] w-[500px] ${
-        quizLoading ? "bg-[white]" : "bg-[var(--gold)]"
-      }
+      className={` flex-1 max-w-[100%] w-[500px]
+        bg-[white]
             shadow-[var(--shadow2)]
             rounded-2xl max-md:rounded-[24px_24px_0_0] px-8 py-6 mx-auto flex flex-col justify-between gap-4 `}
     >
@@ -98,31 +104,41 @@ const Question = ({
             "
               >
                 <p className="text-xl max-md:text-lg font-semibold text-[var(--teal)] w-[40px] h-[40px] max-md:h-[30px] max-md:w-[30px] rounded-full flex items-center justify-center bg-[var(--gold)]">
-                  {allData.items[quizItemId].id}
+                  <span key={quizItemId} data-aos="zoom-in">
+                    {allData.items[quizItemId].id}
+                  </span>
                 </p>{" "}
                 <p className="">of</p>
                 <p className="text-xl max-md:text-base font-semibold text-[var(--teal)] w-[40px] h-[40px] max-md:h-[30px] max-md:w-[30px] rounded-full flex items-center justify-center bg-[var(--warm)]">
-                  {allData.items.length}
+                  <span data-aos="fade-in">{allData.items.length}</span>
                 </p>
               </div>
 
-              <video
-                ref={videoRef}
-                src={allData.items[quizItemId].video}
-                loop
-                muted
-                autoPlay
-                className={`aspect-square object-cover rounded-3xl max-w-[50%] shadow-[var(--shadow2)] transition-all
+              <div
+                key={quizItemId}
+                data-aos="zoom-out"
+                className="w-full flex items-center justify-center max-w-[50%]"
+              >
+                <video
+                  ref={videoRef}
+                  src={allData.items[quizItemId].video}
+                  loop
+                  muted
+                  autoPlay
+                  className={`aspect-square object-cover rounded-3xl max-w-[100%] shadow-[var(--shadow2)] transition-all
             ${
               videoPaused
                 ? "scale-90 brightness-80"
                 : "scale-100 brightness-100"
             }`}
-              />
+                />
+              </div>
 
               <div className="flex flex-col gap-2">
                 {!videoPaused ? (
                   <button
+                    key={videoPaused}
+                    data-aos="zoom-in"
                     className="cursor-pointer w-[50px] h-[50px] max-sm:w-[40px] max-sm:h-[40px] rounded-full bg-[var(--red)] flex items-center justify-center text-[var(--smokey)]
                 hover:shadow-[var(--shadow3)] transition-all outline-none
                 "
@@ -134,6 +150,8 @@ const Question = ({
                   </button>
                 ) : (
                   <button
+                    key={videoPaused}
+                    data-aos="zoom-in"
                     className="cursor-pointer w-[50px] h-[50px] max-sm:w-[40px] max-sm:h-[40px] rounded-full bg-[var(--teal)] flex items-center justify-center text-[var(--gold)]
                 shadow-[var(--shadow)] hover:shadow-[var(--shadow3)] transition-all outline-none
                 "
@@ -146,6 +164,7 @@ const Question = ({
                 )}
                 {showLastQuestion() && (
                   <button
+                    data-aos="zoom-in"
                     className="cursor-pointer w-[50px] h-[50px] max-sm:w-[40px] max-sm:h-[40px] rounded-full bg-[var(--teal)] flex items-center justify-center text-[var(--gold)]
                 hover:shadow-[var(--shadow3)] transition-all outline-none
                 "
@@ -160,6 +179,7 @@ const Question = ({
                   Object.keys(quizData?.currentQuiz?.answers || {}).length >
                     1 && (
                     <button
+                      data-aos="zoom-in"
                       className="cursor-pointer w-[50px] h-[50px] max-sm:w-[40px] max-sm:h-[40px] rounded-full bg-[var(--red)] flex items-center justify-center text-[var(--smokey)]
                 hover:shadow-[var(--shadow3)] transition-all outline-none
                 "
@@ -172,7 +192,11 @@ const Question = ({
                   )}
               </div>
             </div>
-            <div className="text-[var(--sky)] font-semibold flex-1 text-right my-3 text-lg max-sm:text-base">
+            <div
+              className="text-[var(--sky)] font-semibold flex-1 text-right my-3 text-lg max-sm:text-base"
+              data-aos="zoom-out"
+              data-aos-delay="100"
+            >
               {allData.question}
             </div>
           </div>
@@ -182,6 +206,7 @@ const Question = ({
             options={allData.items[quizItemId].options}
             selected={selectedAnswer}
             onChange={onAnswerSelect}
+            quizItemId={quizItemId}
           />
 
           <div className="flex flex-wrap items-center max-w-[100%] w-[500px] mx-auto justify-between gap-4 *:flex-1">
@@ -230,14 +255,17 @@ const Question = ({
           </div>
 
           {alert && (
-            <div className=" z-[200] fixed h-svh w-full top-0 left-0 flex flex-col justify-center max-md:justify-end items-center backdrop-blur-lg ">
+            <div
+              className=" z-[200] fixed h-svh w-full top-0 left-0 flex flex-col justify-center items-center backdrop-blur-lg "
+              data-aos="zoom-out"
+            >
               <div
                 className="fixed z-[-1] h-svh w-full top-0 left-0  bg-[var(--black)] opacity-50"
                 onClick={() => {
                   handleAlert();
                 }}
               />
-              <div className="bg-[var(--smokey)] rounded-2xl px-16 max-md:px-4 py-8 drop-shadow-2xl max-md:w-[100%] flex justify-center shadow-[var(--shadow3)] flex-wrap max-md:rounded-[32px_32px_0_0]">
+              <div className="bg-[var(--smokey)] rounded-2xl px-16 max-md:px-4 py-8 drop-shadow-2xl flex justify-center shadow-[var(--shadow3)] flex-wrap ">
                 <div className="w-fit flex justify-center gap-8 flex-col flex-wrap">
                   <div className="flex flex-col text-right gap-4 bg-[var(--warm)] rounded-2xl p-4">
                     <p className="text-lg max-md:text-base text-[var(--red)] font-semibold">

@@ -3,6 +3,8 @@ import React, { useEffect } from "react";
 import { Button } from "./elements";
 import { useRouter } from "next/navigation";
 import { useQuiz } from "@/lib/quizProvider";
+import Aos from "aos";
+import "aos/dist/aos.css";
 
 const Result = () => {
   const { quizData, quizLoading } = useQuiz();
@@ -28,6 +30,8 @@ const Result = () => {
       className="relative flex-1 max-w-[100%] max-md:w-[100%] w-[500px] 
             shadow-[var(--shadow2)]
             rounded-2xl max-md:rounded-[24px_24px_0_0] px-8 py-6 mx-auto flex flex-col justify-between gap-8"
+      data-aos="zoom-in"
+      data-aos-delay="500"
     >
       <div
         className="absolute top-0 right-0 left-0 bottom-0 mask-b-from-0.5 opacity-10 rounded-2xl"
@@ -41,6 +45,8 @@ const Result = () => {
           style={{
             direction: "rtl",
           }}
+          data-aos="zoom-out"
+          data-aos-delay="600"
         >
           <h1 className="text-xl text-[var(--gold)]">نتيجة الاختبار</h1>
           <div className="text-[var(--teal)] w-[50px] h-[50px] flex items-center justify-center rounded-xl bg-[white] text-xl -m-1">
@@ -48,22 +54,38 @@ const Result = () => {
           </div>
         </div>
         <div className="flex-1 flex flex-col gap-4 justify-around">
-          <div className="font-[space_grotesk] border flex items-center justify-around border-[var(--smokey)] rounded-2xl px-4 py-8 bg-[#ffd9009a] gap-8 flex-wrap">
-            <div className="relative bg-[white] text-[var(--sky)] font-semibold flex items-center justify-center text-2xl w-[70px] h-[70px] rounded-full order-1">
+          <div
+            className="font-[space_grotesk] border flex items-center justify-around border-[var(--smokey)] rounded-2xl px-4 py-8 bg-[#ffd9009a] gap-8 flex-wrap"
+            data-aos="zoom-in"
+            data-aos-delay="700"
+          >
+            <div
+              className="relative bg-[white] text-[var(--sky)] font-semibold flex items-center justify-center text-2xl w-[70px] h-[70px] rounded-full order-1"
+              data-aos="fade-left"
+              data-aos-delay="750"
+            >
               {quizData?.lastQuiz?.correctQuestions}
               <span className="absolute top-[-10px] right-0 text-[white] bg-[var(--sky)] w-[30px] h-[30px] font-semibold rounded-full flex items-center justify-center text-base font-[space_grotesk]">
                 <i className="fi fi-sr-check mt-1.5"></i>
               </span>
             </div>
 
-            <div className="relative bg-[white] text-[var(--purple)] font-semibold flex items-center justify-center text-2xl w-[70px] h-[70px] rounded-full order-2 max-[375px]:order-3">
+            <div
+              className="relative bg-[white] text-[var(--purple)] font-semibold flex items-center justify-center text-2xl w-[70px] h-[70px] rounded-full order-2 max-[375px]:order-3"
+              data-aos="fade-in"
+              data-aos-delay="900"
+            >
               {quizData?.lastQuiz?.percentage}
               <span className="absolute top-[-10px] right-0 text-[white] bg-[var(--purple)] w-[30px] h-[30px] font-semibold rounded-full flex items-center justify-center text-base font-[space_grotesk]">
                 %
               </span>
             </div>
 
-            <div className="relative bg-[white] text-[var(--red)] font-semibold flex items-center justify-center text-2xl w-[70px] h-[70px] rounded-full order-3 max-[375px]:order-2">
+            <div
+              className="relative bg-[white] text-[var(--red)] font-semibold flex items-center justify-center text-2xl w-[70px] h-[70px] rounded-full order-3 max-[375px]:order-2"
+              data-aos="fade-right"
+              data-aos-delay="800"
+            >
               {quizData?.lastQuiz?.wrongQuestions}
               <span className="absolute top-[-10px] right-0 text-[white] bg-[var(--red)] w-[30px] h-[30px] font-semibold rounded-full flex items-center justify-center text-base font-[space_grotesk]">
                 <i className="fi fi-sr-x text-sm mt-1"></i>
@@ -71,7 +93,11 @@ const Result = () => {
             </div>
           </div>
 
-          <div className="flex flex-col items-center">
+          <div
+            className="flex flex-col items-center"
+            data-aos="fade-up"
+            data-aos-delay="900"
+          >
             <h1 className=" text-[var(--sky)] bg-[white] font-semibold rounded-full flex items-center px-4 py-2  justify-center text-base z-[1] mb-[-10px]">
               النقاط
             </h1>
@@ -86,7 +112,9 @@ const Result = () => {
               </span>
 
               <h1 className="text-[white] w-[70px] h-[70px] flex items-center justify-center rounded-full bg-[var(--sky)] font-[space_grotesk] text-2xl -m-1">
-                {quizData?.lastQuiz?.quizScore}
+                <span data-aos="zoom-out" data-aos-delay="1200">
+                  {quizData?.lastQuiz?.quizScore}
+                </span>{" "}
               </h1>
             </div>
           </div>

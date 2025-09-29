@@ -8,6 +8,8 @@ import { handleLogin } from "@/lib/auth";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "@/lib/firebase";
+import Aos from "aos";
+import "aos/dist/aos.css";
 
 const Page = () => {
   const router = useRouter();
@@ -47,6 +49,10 @@ const Page = () => {
     },
   ];
 
+  useEffect(() => {
+    Aos.init();
+  }, []);
+
   return (
     <form
       onSubmit={handleSubmit(async (data) => {
@@ -64,8 +70,15 @@ const Page = () => {
     bg-[var(--smokey)] p-5
     "
       >
-        <div className="flex flex-col gap-8 max-w-[100%] bg-[white] p-7 rounded-2xl shadow-md">
-          <div className="flex flex-col gap-1 ">
+        <div
+          className="flex flex-col gap-8 max-w-[100%] bg-[white] p-7 rounded-2xl shadow-md"
+          data-aos="zoom-out"
+        >
+          <div
+            className="flex flex-col gap-1 "
+            data-aos="fade-in"
+            data-aos-delay="100"
+          >
             <div className="flex gap-4 text-[var(--teal)] text-xl items-center">
               <i className="fi fi-rr-sign-in-alt mt-1.5"></i>
 
@@ -83,6 +96,8 @@ const Page = () => {
               return (
                 <div
                   key={i}
+                  data-aos="zoom-in"
+                  data-aos-delay={200 + i * 100}
                   className="flex flex-col gap-1 max-w-[100%] w-[300px]"
                 >
                   <div className="flex rounded-full border border-[var(--sky)] px-4 py-2 items-center gap-4">

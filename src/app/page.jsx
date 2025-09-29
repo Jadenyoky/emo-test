@@ -6,12 +6,15 @@ import { Button } from "../components/elements";
 import { useRouter } from "next/navigation";
 import { useAuth } from "@/lib/authProvider";
 import { useQuiz } from "@/lib/quizProvider";
+import Aos from "aos";
+import "aos/dist/aos.css";
 
 const Page = () => {
   const { user, loading } = useAuth();
   const { quizData, quizLoading } = useQuiz();
   useEffect(() => {
     console.log(quizData);
+    Aos.init();
   }, []);
 
   const router = useRouter();
@@ -26,7 +29,10 @@ const Page = () => {
         <div className="flex flex-col capitalize gap-4 items-center ">
           <div className="relative w-fit ">
             <div className="rounded-2xl h-[50%] w-[50px] absolute bottom-0 right-0 bg-[var(--gold)] z-[-1] rotate-2 opacity-50" />
-            <h1 className=" text-3xl max-md:text-xl font-semibold text-[var(--red)] text-center capitalize">
+            <h1
+              className=" text-3xl max-md:text-xl font-semibold text-[var(--red)] text-center capitalize"
+              data-aos="fade-down"
+            >
               welcome to
             </h1>
           </div>

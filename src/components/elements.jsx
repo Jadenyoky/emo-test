@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
+import Aos from "aos";
+import "aos/dist/aos.css";
 
 export const Button = ({
   title,
@@ -277,16 +279,24 @@ const StyledWrapperButton = styled.div`
   }
 `;
 
-export const Radio = ({ name, options, selected, onChange }) => {
+export const Radio = ({ name, options, selected, onChange, quizItemId }) => {
   return (
-    <StyledWrapper className="relative flex-1 *:flex-1 bg-[var(--white)] rounded-2xl px-4 py-4 shadow-[var(--shadow2)] font-[changa] overflow-hidden">
+    <StyledWrapper
+      key={quizItemId}
+      className="relative flex-1 *:flex-1 bg-[var(--white)] rounded-2xl px-4 py-4 shadow-[var(--shadow2)] font-[changa] overflow-hidden"
+    >
       <img
         src="/pics/quiz-options.png"
         className="absolute top-0 right-25 bg-cover max-w-[100%] rotate-12 opacity-5 pointer-events-none"
       />
       {options?.map((option, i) => {
         return (
-          <label key={i} className="radio-label">
+          <label
+            key={i}
+            className="radio-label"
+            data-aos="zoom-out"
+            data-aos-delay={i * 100}
+          >
             <input
               className="radio-input"
               type="radio"
